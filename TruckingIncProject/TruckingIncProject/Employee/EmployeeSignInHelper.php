@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     if (empty($user) || empty($pass))
     {
-			echo '<form action="EmployeeSignIn.php">';
+			echo '<form action="EmployeeHomeHelper.php">';
 			echo '<p>ERROR! You must to fill out both fields!</p>';
 			echo '<button>Ok</button>';
 			echo '</form>';
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       	}
 				else
 				{
-					echo '<form action="EmployeeSignIn.php">';
+					echo '<form action="EmployeeHomeHelper.php">';
 					echo '<p>ERROR! This is the wrong password for this user!</p>';
 					echo '<button>Ok</button>';
 					echo '</form>';
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       else
       {
         echo '<h1>System Error</h1>';
-        echo '<form action="EmployeeSignIn.php">';
+        echo '<form action="EmployeeHomeHelper.php">';
         echo '<p>Something went wrong...</p>';
         echo '<button>Ok</button>';
         echo '</form>';

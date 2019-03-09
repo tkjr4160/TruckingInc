@@ -38,7 +38,7 @@
 			</p>
 		</div>
 	</form>
-	<form action="EmployeeSignIn.php" method="POST" class="Form">
+	<form action="EmployeeHomeHelper.php" method="POST" class="Form">
 		<div class="FormDiv">
 			<p class="FormDivPar">
 				<button type="submit" id="EmployeeSignOutButton" name="EmployeeSignOutButton" class="FormDivParButton" value="EmployeeSignOut">Log Out</button>
