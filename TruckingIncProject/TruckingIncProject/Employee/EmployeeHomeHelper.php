@@ -6,6 +6,7 @@ require ('CheckSignedIn.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+  
   if ($_POST['EmployeeSignOutButton'] == 'EmployeeSignOut')
   {
     $_SESSION = array();

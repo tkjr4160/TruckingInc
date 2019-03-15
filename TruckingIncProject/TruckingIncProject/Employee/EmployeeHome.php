@@ -20,7 +20,8 @@
 		<a href="EmployeeResuply.php">Resupply</a></br>
 		<a href="../TruckingIncHome.php">Website Home</a></br>
 	</div>
-	<form action="EmployeeSignIn.php" method="POST" class="Form">
+<!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
+	<form action="EmployeeHomeHelper.php" method="POST" class="Form">
 		<div class="FormDiv">
 			<p class="FormDivPar">
 				<button type="submit" id="EmployeeSignOutButton" name="EmployeeSignOutButton" class="FormDivParButton" value="EmployeeSignOut">Log Out</button>

@@ -2,7 +2,7 @@
 
 -->
 
-<?php include "CustomerCreateOrderHelper.php"; ?>
+<?php include "CustomerCreateOrderHelper.php" ?>
 
 <!DOCTYPE HTML>
 <html>
@@ -13,30 +13,39 @@
 <body>
 	<div class="Div">
 		<a href="CustomerHome.php">Customer Home</a></br>
-		<a href="../TruckingIncHome.php">Website Home</a>
+		<!-- <a href="../TruckingIncHome.php">Website Home</a> -->
 	</div>
-	<form action="CustomerOrderHistory.php" method="POST" class="Form">
-		<div class="FormDiv">
+	
+	<!-- -------------------------------- Create Customer Order --------------------------------  -->
+	<form action="CustomerCreateOrder.php" method="POST" class="Form">
+		<div align="center" class="FormDiv">
+
+			<!-- Select Lumber Type -->
 			<p class="FormDivPar">
 				<label class="FormDivParLabel">Lumber Type: </label>
-				<select id="LumberType" name="LumberType" class="FormDivParSel">
-					<option value="Oak">Oak</option> <option value="Maple">Maple</option> <option value="Ash">Ash</option> <option value="Cherry">Cherry</option>
-					<option value="Mahogany">Mahogany</option> <option value="Birch">Birch</option>
+				<?php
+				$lumberTypeList = '';
+				while ($row = mysqli_fetch_array($lumberTypeExecution)) 
+				{
+					$lumberTypeList .= '<option value="' . $row['lumberType'] . '">' . $row['lumberType'] . '</option>';
+				}
+				?>
+				<select name="SelectLumber<?php $row['lumberType'] ?>">
+					<option disabled selected="true" value="Lumber">Select Lumber Type</option>
+					<?php echo $lumberTypeList; ?>
 				</select>
 			</p>
+			
+			<!-- Enter Quantity -->
 			<p class="FormDivPar">
+				
 				<label class="FormDivParLabel">Number of Units: </label>
 				<input type="text" id="NumberUnits" name="NumberUnits" class="FormDivParSel" size="5"/>
 			</p>
+
+			<!-- Submit order -->
 			<p class="FormDivPar">
 				<button type="submit" id="CustomerCreateOrderButton" name="CustomerCreateOrderButton" class="FormDivParButton" value="CustomerCreateOrder">Submit</button>
-			</p>
-		</div>
-	</form>
-	<form action="CustomerSignIn.php" method="POST" class="Form">
-		<div class="FormDiv">
-			<p class="FormDivPar">
-				<button type="submit" id="CustomerSignOutButton" name="CustomerSignOutButton" class="FormDivParButton" value="CustomerSignOut">Log Out</button>
 			</p>
 		</div>
 	</form>
