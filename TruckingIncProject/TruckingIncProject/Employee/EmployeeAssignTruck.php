@@ -49,7 +49,7 @@
 						</select>
 					</td>
 					<td align="left">
-						<select name="ChangeTruck <?php $row2['truckID'] ?>">
+						<select name="ChangeTruck<?php $row2['truckID'] ?>">
 							<option disabled selected="true" value="Truck">Select a Truck</option>
 							<?php echo $truckList ?>
 						</select>

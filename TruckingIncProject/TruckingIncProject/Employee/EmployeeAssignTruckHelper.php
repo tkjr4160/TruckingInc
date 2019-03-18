@@ -35,13 +35,14 @@ $TruckTableExecute = @mysqli_query($dbc, $TruckTableQuery);
 // Begin
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    // *********************** Assign Trucks ***********************
+  // *********************** Assign Trucks ***********************
   if ($_POST['AssignTruckButton'] == 'AssignTruck')
   {
     if (empty($truckid) || empty($employeeid))
     {
       echo '<form action="EmployeeHome.php">';
-      echo '<p>ERROR! An employee and a truck must be selected!</p>';
+      echo '<p>ERROR! An employee and a truck must be selected to assign a truck!</p>';
+      echo ' truckid: ' . $truckid . ' employeeid: ' . $employeeid;
       echo '<button>Ok</button>';
       echo '</form>';
     }
@@ -67,24 +68,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       mysqli_close($dbc);
     }
   }
-
+  
   // *********************** Unassign Trucks ***********************
   if ($_POST['UnassignTruckButton'] == 'UnassignTruck')
   {
 
-  if (empty($truckid2) || empty($employeeid2))
-  {
-    echo '<form action="EmployeeSignUp.php">';
-    echo '<p>ERROR! An employee and a truck must be selected!</p>';
-    echo '<button>Ok</button>';
-    echo '</form>';
-  }
-  else
-  {
-    $updateEmployeeQuery = 'UPDATE Employee, Truck SET Employee.truckID = NULL, Truck.inUse = "N" WHERE Employee.employeeID = ' . $employeeid2 . ' AND Truck.truckID = ' . $truckid2 . '';
-    $updateEmployeeExecution = @mysqli_query($dbc, $updateEmployeeQuery);
-  //  $updateTruckQuery = 'UPDATE Truck SET inUse = "U" WHERE truckID = ' . $truckid . ';';
-  //  $updateTruckExecution = @mysqli_query($dbc, $updateTruckQuery);
+    if (empty($truckid2) || empty($employeeid2))
+    {
+      echo '<form action="EmployeeSignUp.php">';
+      echo '<p>ERROR! An employee and a truck must be selected to unassign a truck!</p>';
+      echo '<button>Ok</button>';
+      echo '</form>';
+    }
+    else
+    {
+      $updateEmployeeQuery = 'UPDATE Employee, Truck SET Employee.truckID = NULL, Truck.inUse = "N" WHERE Employee.employeeID = ' . $employeeid2 . ' AND Truck.truckID = ' . $truckid2 . '';
+      $updateEmployeeExecution = @mysqli_query($dbc, $updateEmployeeQuery);
 
     if ($updateEmployeeExecution)
     {
