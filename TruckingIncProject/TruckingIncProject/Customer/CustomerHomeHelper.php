@@ -16,6 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     setcookie(session_name(),'',0,'/');
     //unset($_SESSION['CustomerUsername']);
     //unset($_SESSION['CustomerPassword']);
-    //header ('Location: CustomerSignIn.php');
+    header ('Location: CustomerSignIn.php');
   }
 }

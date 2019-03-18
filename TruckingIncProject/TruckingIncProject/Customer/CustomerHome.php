@@ -17,7 +17,7 @@
 		<a href="CustomerAccount.php">My Account</a></br>
 		<a href="../TruckingIncHome.php">Website Home</a>
 	</div>
-	<form action="CustomerSignIn.php" method="post" class="Form">
+	<form action="CustomerHomeHelper.php" method="post" class="Form">
 		<div class="FormDiv">
 			<p class="FormDivPar">
 				<button type="submit" id="CustomerSignOutButton" name="CustomerSignOutButton" class="FormDivParButton" value="CustomerSignOut">Log Out</button>

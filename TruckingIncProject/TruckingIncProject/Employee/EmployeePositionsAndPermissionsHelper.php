@@ -1,14 +1,10 @@
-<!--
-
--->
-
 <?php
 
 session_start();
 require ('CheckSignedIn.php');
 require ('CheckPermissionA.php');
 
-$EmployeeListQuery = "Select * From Employee Where employeeID != '1'";
+$EmployeeListQuery = "Select * From Employee";
 $EmployeeListExecution = @mysqli_query($dbc, $EmployeeListQuery);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -20,41 +16,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $id = $row['employeeID'];
       $newPos = $_POST['ChangePosition' . $id];
       $newPerm = $_POST['ChangePermission' . $id];
-
-
-
-      if (($row['position'] == 'Truck Driver') && ($newPos != 'Truck Driver') && isset($row['truckID']))
-      {
-        $CurrentTruckID = $row['truckID'];
-        $ChangeTruckInUseQuery = "Update Truck Set inUse = 'N' Where truckID = '$CurrentTruckID'";
-        $NullEmployeeTruckIDQuery = "Update Employee Set truckID = NULL Where employeeID = '$id'";
-        $ChangeTruckInUseExecution = @mysqli_query($dbc, $ChangeTruckInUseQuery);
-        $NullEmployeeTruckIDExecution = @mysqli_query($dbc, $NullEmployeeTruckIDQuery);
-
-        if ($ChangeTruckInUseExecution && $NullEmployeeTruckIDExecution)
-        {
-
-        }
-        else
-        {
-          echo '<h1>System Error</h1>';
-          echo '<form action="EmployeePositionsAndPermissions.php">';
-          echo '<p>Something went wrong...</p>';
-          echo '<button>Ok</button>';
-          echo '</form>';
-        }
-      }
-
-      $ChangePosPermQuery = "Update Employee Set position = '$newPos', permissionsType = '$newPerm' Where employeeID = '$id'";
-      $ChangePosPermExecution = @mysqli_query($dbc, $ChangePosPermQuery);
-
-      if ($ChangePosPermExecution)
+      $ChangePosQuery = "Update Employee Set position = '$newPos' Where employeeID = '$id'";
+      $ChangePermQuery = "Update Employee Set permissionsType = '$newPerm' Where employeeID = '$id'";
+      $ChangePosExecution = @mysqli_query($dbc, $ChangePosQuery);
+      $ChangePermExecution = @mysqli_query($dbc, $ChangePermQuery);
+      if ($ChangePosExecution && $ChangePermExecution)
       {
         header('Location: EmployeePositionsAndPermissions.php');
       }
       else
       {
-
+        echo '<h1>System Error</h1>';
+        echo '<form action="EmployeePositionsAndPermissions.php">';
+        echo '<p>Something went wrong...</p>';
+        echo '<button>Ok</button>';
+        echo '</form>';
       }
     }
   }

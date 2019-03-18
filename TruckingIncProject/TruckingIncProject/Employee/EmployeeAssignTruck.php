@@ -148,33 +148,34 @@
 	&nbsp;
 	<div align="center"><h3>Truck Listings</h3></div>
 	<div class="FormDiv">
-		<table align="center" cellspacing="3" cellpadding="3" width="50%">
+	<table align="center" cellspacing="3" cellpadding="3" width="50%">
 		<tr>
-		<td align="left"><b>Truck ID</b></td>
-		<td align="left"><b>Make</b></td>
-		<td align="left"><b>Model</b></td>
-		<td align="left"><b>Color</b></td>
-		<td align="left"><b>Year</b></td>
-		<td align="left"><b>License Number</b></td>
-		<td align="left"><b>Purchase Price</b></td>
-		<td align="left"><b>In Use</b></td>
-		<td align="left"><b>Driver</b></td>
+			<td align="left"><b>Truck ID</b></td>
+			<td align="left"><b>Make</b></td>
+			<td align="left"><b>Model</b></td>
+			<td align="left"><b>Color</b></td>
+			<td align="left"><b>Year</b></td>
+			<td align="left"><b>License Number</b></td>
+			<td align="left"><b>Purchase Price</b></td>
+			<td align="left"><b>In Use</b></td>
+			<td align="left"><b>Driver</b></td>
 		</tr>
-			<?php
-			while ($row = mysqli_fetch_array($TruckTableExecute))
-			{
-				echo "<tr>
-				<td>" . $row['truckID'] . "</td>
-				<td>" . $row['make'] . "</td>
-				<td>" . $row['model'] . "</td>
-				<td>" . $row['color'] . "</td>
-				<td>" . $row['year'] . "</td>
-				<td>" . $row['licenseNo'] . "</td>
-				<td>" . $row['priceBoughtFor'] . "</td>
-				<td>" . $row['inUse'] . "</td>
-				<td>" . $row['employeeID'] . "</td></tr>";
-			}
-			?>
-		</table>
+		<?php
+		while ($row = mysqli_fetch_array($TruckTableExecute))
+		{
+			echo "<tr>
+			<td>" . $row['truckID'] . "</td>
+			<td>" . $row['make'] . "</td>
+			<td>" . $row['model'] . "</td>
+			<td>" . $row['color'] . "</td>
+			<td>" . $row['year'] . "</td>
+			<td>" . $row['licenseNo'] . "</td>
+			<td>" . $row['priceBoughtFor'] . "</td>
+			<td>" . $row['inUse'] . "</td>
+			<td>" . $row['employeeID'] . "</td>
+			</tr>";
+		}
+		?>
+	</table>
 	</body>
 </html>

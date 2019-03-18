@@ -5,7 +5,8 @@ session_start();
 
 require ('CheckSignedIn.php');
 
-// *********************** Create Order ***********************
+// *********************** Data for Create Order ***********************
+// Retrieve lumber type
 $lumberTypeQuery = "SELECT lumberType FROM Product";
 $lumberTypeExecution = @mysqli_query($dbc, $lumberTypeQuery);
 $lumberType = $_POST['SelectLumber']; $lumberType = htmlentities($lumberType);
@@ -31,8 +32,19 @@ $row3 = mysqli_fetch_array($costUnitExecute);
 $costPerUnit = $row3['costSoldPerUnit'];
 
 // Calculate total cost of order
-$totalCost = (intval($numberOfUnits) * intval($costPerUnit));     
+$shippingFee = 1500;
+$totalCost = (intval($numberOfUnits) * intval($costPerUnit)) + intval($shippingFee);
 
+// *********************** Data for List Transactions ***********************
+$transactionsQuery = 'SELECT transactionID, productID, numberOfUnits, totalCost, transactionStatus FROM Transact WHERE customerID = ' . $customerID . ';';
+$transactionsExecute = @mysqli_query($dbc, $transactionsQuery);
+
+// *********************** Data for Create Shipment ***********************
+// Retrieve address
+$street = $_POST['Street']; $street = htmlentities($street);
+$city = $_POST['City']; $city = htmlentities($city);
+$state = $_POST['State']; $state = htmlentities($state);
+$zip = $_POST['ZIP']; $zip = htmlentities($zip);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -55,26 +67,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         else
         {            
             // Create new transaction
-            $createOrderQuery = 'INSERT INTO Transact (customerID, productID, numberOfUnits, totalCost, transactionStatus)
-            VALUES (' . $customerID . ', ' . $productID . ',' . $numberOfUnits . ', ' . $totalCost . ', "N")';
+            $createOrderQuery = 'INSERT INTO Transact (customerID, productID, numberOfUnits, shippingFee, totalCost, transactionStatus)
+            VALUES (' . $customerID . ', ' . $productID . ', ' . $numberOfUnits . ', ' . $shippingFee . ', ' . $totalCost . ', "N")';
             $createOrderExecute = @mysqli_query($dbc, $createOrderQuery);
             
-        if ($createOrderExecute)
-        {
-            header('Location: CustomerCreateOrder.php');
-        }
-        else
-        {
-            echo '<h1>System Error</h1>';
-            echo "CusID: " . $customerID . " ";
-            echo "ProdID: " . $productID . " ";
-            echo "NOU: " . $numberOfUnits . " ";
-            echo "Totac: " . $totalCost . " ";
-            echo '<form action="CustomerCreateOrder.php">';
-            echo '<p>Something went wrong...</p>';
-            echo '<button>Ok</button>';
-            echo '</form>';
-        }
+            if ($createOrderExecute)
+            {
+                // Grab transactionID of the transaction created above
+                $transactionID = mysqli_insert_id($dbc);
+
+                // Create new shipment
+                $createShipmentQuery = 'INSERT INTO Shipment (transactionID, street, city, state, zip) 
+                VALUES ("' . $transactionID . '", "' . $street . '", "' . $city . '", "' . $state . '", "' . $zip . '")';
+                $createShipmentExecute = @mysqli_query($dbc, $createShipmentQuery);
+
+                if ($createShipmentExecute) {
+                    header('Location: CustomerCreateOrder.php');
+                    echo '<h3>Transaction and Shipment creation successful!</h3>';
+                }
+                else {
+                    echo 'Failed to connect to MySQL: ' . mysqli_error($dbc);
+                }
+               
+            }
+            else
+            {
+                echo '<h1>System Error</h1>';
+                echo "CusID: " . $customerID . " ";
+                echo "ProdID: " . $productID . " ";
+                echo "NOU: " . $numberOfUnits . " ";
+                echo "Totac: " . $totalCost . " ";
+                echo '<form action="CustomerCreateOrder.php">';
+                echo '<p>Something went wrong...</p>';
+                echo '<button>Ok</button>';
+                echo '</form>';
+            }
         mysqli_close($dbc);
         }
     }
