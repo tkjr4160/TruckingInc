@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
       echo '<form action="EmployeeSignUp.php">';
       echo '<p>ERROR! An employee and a truck must be selected to unassign a truck!</p>';
+      echo ' truckid: ' . $truckid2 . ' employeeid: ' . $employeeid2;
       echo '<button>Ok</button>';
       echo '</form>';
     }
