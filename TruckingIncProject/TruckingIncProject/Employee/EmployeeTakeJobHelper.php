@@ -7,8 +7,10 @@ require ('CheckTruckDriver.php');
 
 // *********************** Data for Create Order ***********************
 // Retrieve shipments with no employee assigned
-$shipmentsQuery = 'SELECT Shipment.*, Transact.productID, Transact.numberOfUnits FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID) WHERE employeeID IS NULL';
+$shipmentsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID) WHERE employeeID IS NULL';
 $shipmentsExecute = @mysqli_query($dbc, $shipmentsQuery);
+$row1 = mysqli_fetch_array($shipmentsExecute);
+$transactionID = $row1['transactionID'];
 
 // Retrieve logged-in employee's ID
 $username = $_SESSION['EmployeeUsername'];
@@ -30,6 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
       if ($assignExecute) {
         header('Location: EmployeeTakeJob.php');
+
+        // Update transaction status in Transact table
+        $updateTransactionQuery = 'UPDATE Transact SET transactionStatus = "A" WHERE transactionID = ' . $transactionID . ';';
+        $updateTransactionExecute = @mysqli_query($dbc, $updateTransactionQuery);
+        // Test
+        if($updateTransactionExecute) {
+          echo 'Success!';
+        }
+        else {
+          echo 'Failure!';
+        }
       }
       else {
         echo 'SQL ERROR: ' . mysqli_error($dbc);
