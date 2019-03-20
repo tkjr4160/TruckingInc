@@ -6,12 +6,6 @@ session_start();
 require ('CheckSignedIn.php');
 
 // *********************** Data for Create Order ***********************
-// Retrieve lumber type
-$lumberTypeQuery = "SELECT lumberType FROM Product";
-$lumberTypeExecution = @mysqli_query($dbc, $lumberTypeQuery);
-$lumberType = $_POST['SelectLumber']; $lumberType = htmlentities($lumberType);
-$numberOfUnits = $_POST['NumberUnits']; $numberOfUnits = htmlentities($numberOfUnits);
-
 // Retrieve customerID from currently logged-in user
 $username = $_SESSION['CustomerUsername'];
 $customerIDQuery = 'SELECT customerID FROM Customer WHERE Customer.WebsiteUsername = "' . $username . '";';
@@ -19,24 +13,27 @@ $customerIDExecute = @mysqli_query($dbc, $customerIDQuery);
 $row1 = mysqli_fetch_array($customerIDExecute);
 $customerID = $row1['customerID'];
 
+// Retrieve lumber type for customer options
+$lumberTypeQuery = "SELECT lumberType FROM Product";
+$lumberTypeExecution = @mysqli_query($dbc, $lumberTypeQuery);
+// Retrieve lumber type and quantity from user
+$lumberType = $_POST['SelectLumber']; $lumberType = htmlentities($lumberType);
+$numberOfUnits = $_POST['NumberUnits']; $numberOfUnits = htmlentities($numberOfUnits);
+
 // Retrieve productID based upon user-selected lumberType
-$productIDQuery = 'SELECT productID FROM Product WHERE Product.lumberType = "' . $lumberType . '";';
+$productIDQuery = 'SELECT productID, numInStock, costSoldPerUnit FROM Product WHERE Product.lumberType = "' . $lumberType . '";';
 $productIDExecute = @mysqli_query($dbc, $productIDQuery);
 $row2 = mysqli_fetch_array($productIDExecute);
 $productID = $row2['productID'];
-
-// Retrieve cost-per-unit of user-selected lumber type
-$costUnitQuery = 'SELECT costSoldPerUnit FROM Product WHERE Product.lumberType = "' . $lumberType . '";';
-$costUnitExecute = @mysqli_query($dbc, $costUnitQuery);
-$row3 = mysqli_fetch_array($costUnitExecute);
-$costPerUnit = $row3['costSoldPerUnit'];
+$numInStock = $row2['numInStock'];
+$costPerUnit = $row2['costSoldPerUnit'];
 
 // Calculate total cost of order
 $shippingFee = 1500;
 $totalCost = (intval($numberOfUnits) * intval($costPerUnit)) + intval($shippingFee);
 
 // *********************** Data for List Transactions ***********************
-$transactionsQuery = 'SELECT transactionID, productID, numberOfUnits, totalCost, transactionStatus FROM Transact WHERE customerID = ' . $customerID . ';';
+$transactionsQuery = 'SELECT transactionID, productID, numberOfUnits, shippingFee, totalCost, transactionStatus FROM Transact WHERE customerID = ' . $customerID . ';';
 $transactionsExecute = @mysqli_query($dbc, $transactionsQuery);
 
 // *********************** Data for Create Shipment ***********************
@@ -75,18 +72,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             {
                 // Grab transactionID of the transaction created above
                 $transactionID = mysqli_insert_id($dbc);
-
-                // Create new shipment
+                // Create new shipment query
                 $createShipmentQuery = 'INSERT INTO Shipment (transactionID, street, city, state, zip) 
                 VALUES ("' . $transactionID . '", "' . $street . '", "' . $city . '", "' . $state . '", "' . $zip . '")';
-                $createShipmentExecute = @mysqli_query($dbc, $createShipmentQuery);
+
+                // Calculate updated stock
+                $updatedStock = (intval($numInStock) - intval($numberOfUnits));
+                // Update stock query
+                $updateStockQuery = 'UPDATE Product SET numInStock = ' . $updatedStock . ' WHERE Product.productID = ' . $productID . ';';
+
+                if (intval($numInStock) >= intval($numberOfUnits)) {
+                    // Update stock and create new shipment
+                    $updateExecute = @mysqli_query($dbc, $updateStockQuery);
+                    $createShipmentExecute = @mysqli_query($dbc, $createShipmentQuery);
+                }
+                else {
+                    echo '<form action="CustomerCreateOrder.php">';
+                    echo '<p>ERROR! Not enough product in stock!</p>';
+                    echo '<button>Ok</button>';
+                    echo '</form>';
+                }
 
                 if ($createShipmentExecute) {
                     header('Location: CustomerCreateOrder.php');
                     echo '<h3>Transaction and Shipment creation successful!</h3>';
                 }
                 else {
-                    echo 'Failed to connect to MySQL: ' . mysqli_error($dbc);
+                    echo 'SQL ERROR: ' . mysqli_error($dbc);
                 }
                
             }
