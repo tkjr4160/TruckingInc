@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
       $updateEmployeeQuery = 'UPDATE Employee SET truckID = ' . $truckid . ' WHERE employeeID = ' . $employeeid . ';';
       $updateEmployeeExecution = @mysqli_query($dbc, $updateEmployeeQuery);
-      $updateTruckQuery = 'UPDATE Truck SET inUse = "U" WHERE truckID = ' . $truckid . ';';
+      $updateTruckQuery = 'UPDATE Truck SET inUse = "Y" WHERE truckID = ' . $truckid . ';';
       $updateTruckExecution = @mysqli_query($dbc, $updateTruckQuery);
 
       if ($updateEmployeeExecution && $updateTruckExecution)
