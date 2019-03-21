@@ -19,6 +19,9 @@ $employeeIDExecute = @mysqli_query($dbc, $employeeIDQuery);
 $row2 = mysqli_fetch_array($employeeIDExecute);
 $employeeID = $row2['employeeID'];
 
+// Retrieve shipments where currently logged-in employee is assigned
+$currentJobsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID) WHERE employeeID = ' . $employeeID . '';
+$currentJobsExecute = @mysqli_query($dbc, $currentJobsQuery);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -36,13 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         // Update transaction status in Transact table
         $updateTransactionQuery = 'UPDATE Transact SET transactionStatus = "A" WHERE transactionID = ' . $transactionID . ';';
         $updateTransactionExecute = @mysqli_query($dbc, $updateTransactionQuery);
-        // Test
-        if($updateTransactionExecute) {
-          echo 'Success!';
-        }
-        else {
-          echo 'Failure!';
-        }
       }
       else {
         echo 'SQL ERROR: ' . mysqli_error($dbc);
