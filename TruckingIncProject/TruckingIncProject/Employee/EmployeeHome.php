@@ -17,6 +17,7 @@
 	</div>
 	<div class="Div">
     <a href="EmployeeAccount.php">My Account</a>
+		<a href="EmployeeCreateNewEmployee.php">New Employee</a>
     <a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a>
     <a href="EmployeeTakeJob.php">Find Job</a>
 		<a href="EmployeeAssignTruck.php">Truck Management</a>

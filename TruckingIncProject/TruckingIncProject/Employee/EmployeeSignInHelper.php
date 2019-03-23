@@ -16,16 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
   if ($_POST['EmployeeSubmitButton'] == 'EmployeeSignIn')
   {
-
-    if (empty($user) || empty($pass))
-    {
-			echo '<form action="EmployeeSignIn.php">';
-			echo '<p>ERROR! You must to fill out both fields!</p>';
-			echo '<button>Ok</button>';
-			echo '</form>';
-    }
-    else
-    {
       $findEmployeePasswordQuery = "Select AES_DECRYPT(WebsitePassword, 'NACL') From Employee Where WebsiteUsername = '$user'";
       $findEmployeePasswordExecution = @mysqli_query($dbc, $findEmployeePasswordQuery);
 			$fetchEmployeePassword = mysqli_fetch_array($findEmployeePasswordExecution);
@@ -39,10 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       	}
 				else
 				{
-					echo '<form action="EmployeeSignIn.php">';
-					echo '<p>ERROR! This is the wrong password for this user!</p>';
-					echo '<button>Ok</button>';
-					echo '</form>';
+					header('Location: EmployeeWrongPassword.php');
 				}
 			}
       else
@@ -54,6 +41,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         echo '</form>';
       }
       mysqli_close($dbc);
-    }
   }
 }

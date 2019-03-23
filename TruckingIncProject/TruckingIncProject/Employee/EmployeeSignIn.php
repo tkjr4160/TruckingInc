@@ -39,7 +39,6 @@
 			</div>
 		</form>
 		<div class="Div">
-			<a href="EmployeeSignUp.php">No account? Sign up here</a></br>
 			<a href="../TruckingIncHome.php">Back to home</a>
 		</div>
 	</div>
