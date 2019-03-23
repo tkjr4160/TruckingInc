@@ -1,8 +1,11 @@
+<!--
+
+-->
+
 <?php
-include ('../mysqli_connect.php');
 
 session_start();
-
+include ('../mysqli_connect.php');
 require ('CheckSignedIn.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -12,10 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   {
     session_unset();
     session_destroy();
-    session_write_close();
-    setcookie(session_name(),'',0,'/');
-    //unset($_SESSION['CustomerUsername']);
-    //unset($_SESSION['CustomerPassword']);
+    setcookie('PHPSESSID', '', time()-3600, '/', '', 0, 0);
     header ('Location: CustomerSignIn.php');
   }
 }

@@ -1,21 +1,25 @@
+<!--
+
+-->
+
 <?php
 
 session_start();
 include ('../mysqli_connect.php');
 require ('CheckSignedOut.php');
 
-$user = $_POST['EmployeeUsername']; $user = htmlentities($user);
-$pass = $_POST['EmployeePassword']; $pass = htmlentities($pass);
-$fn = $_POST['EmployeeFirstName']; $fn = htmlentities($fn);
-$mi = $_POST['EmployeeMiddleInitial']; $mi = htmlentities($mi);
-$ln = $_POST['EmployeeLastName']; $ln = htmlentities($ln);
-$str = $_POST['EmployeeStreet']; $str = htmlentities($str);
-$cty = $_POST['EmployeeCity']; $cty = htmlentities($cty);
-$stt = $_POST['EmployeeState']; $stt = htmlentities($stt);
-$zp = $_POST['EmployeeZip']; $zp = htmlentities($zp);
-$phn = $_POST['EmployeePhone']; $phn = htmlentities($phn);
-$eml = $_POST['EmployeeEmail']; $eml = htmlentities($eml);
-$rptPass = $_POST['EmployeeRepeatPassword']; $rptPass = htmlentities($rptPass);
+$user = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeUsername'])));
+$pass = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeePassword'])));
+$fn = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeFirstName'])));
+$mi = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeMiddleInitial'])));
+$ln = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeLastName'])));
+$str = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeStreet'])));
+$cty = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeCity'])));
+$stt = $_POST['EmployeeState'];
+$zp = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeZip'])));
+$phn = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeePhone'])));
+$eml = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeEmail'])));
+$rptPass = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeRepeatPassword'])));
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {

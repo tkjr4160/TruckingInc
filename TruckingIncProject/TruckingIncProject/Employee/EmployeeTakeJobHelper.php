@@ -9,27 +9,33 @@ require ('CheckTruckDriver.php');
 // Retrieve shipments with no employee assigned
 $shipmentsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID) WHERE employeeID IS NULL';
 $shipmentsExecute = @mysqli_query($dbc, $shipmentsQuery);
-$row1 = mysqli_fetch_array($shipmentsExecute);
-$transactionID = $row1['transactionID'];
+$shipmentsArray = array();
+while ($row = mysqli_fetch_array($shipmentsExecute)) {
+  $shipmentsArray[] = $row;
+}
 
 // Retrieve logged-in employee's ID
 $username = $_SESSION['EmployeeUsername'];
 $employeeIDQuery = 'SELECT employeeID FROM Employee WHERE Employee.WebsiteUsername = "' . $username . '";';
 $employeeIDExecute = @mysqli_query($dbc, $employeeIDQuery);
-$row2 = mysqli_fetch_array($employeeIDExecute);
-$employeeID = $row2['employeeID'];
+$row = mysqli_fetch_array($employeeIDExecute);
+$employeeID = $row['employeeID'];
 
 // Retrieve shipments where currently logged-in employee is assigned
 $currentJobsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID) WHERE employeeID = ' . $employeeID . '';
 $currentJobsExecute = @mysqli_query($dbc, $currentJobsQuery);
 
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-  while ($row = mysqli_fetch_array($shipmentsExecute)) {
-    
+  foreach ($shipmentsArray as $row) {
+
     if ($_POST['AcceptShipmentButton'] == $row['shipmentID']) {
+
       // Assign currently logged in employee to the selected shipment
       $shipmentID = $row['shipmentID'];
+      $transactionID = $row['transactionID'];
       $assignQuery = 'UPDATE Shipment SET employeeID = ' . $employeeID . ' WHERE Shipment.shipmentID = ' . $shipmentID . ';';
       $assignExecute = @mysqli_query($dbc, $assignQuery);
 

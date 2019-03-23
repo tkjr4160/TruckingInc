@@ -7,21 +7,19 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Shipments</title>
+	<title>Employee Take Job</title>
 	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../Styles.css">
 </head>
-<body class="Div">
-	<div>
-		<a href="EmployeeHome.php">Employee Home</a></br>
+<body>
+	<div id="banner">
+		<img src="../Pictures/TruckingIncLogo.png" alt="Logo" id="logo">
 	</div>
-	<form action="EmployeeHomeHelper.php" method="POST" class="Form">
-		<div class="FormDiv">
-			<p class="FormDivPar">
-				<button type="submit" id="EmployeeSignOutButton" name="EmployeeSignOutButton" class="FormDivParButton" value="EmployeeSignOut">Log Out</button>
-			</p>
-		</div>
-	</form>
-
+	<div class="Div">
+		<a href="EmployeeHome.php">Employee Home</a>
+		<a href="../TruckingIncHome.php">Website Home</a>
+	</div>
+	<div id="form">
 	<!-- List Available Shipments -->
 	<div align="center"><h3>Available Jobs</h3></div>
 	<form action="EmployeeTakeJobHelper.php" method="POST" class="Form">
@@ -34,7 +32,7 @@
 				<td align="left"><b>Address</b></td>
 			</tr>
 			<?php
-			while ($row = mysqli_fetch_array($shipmentsExecute)) {
+			foreach ($shipmentsArray as $row) {
 				echo '
 				<tr>
 					<td align="left">' . $row['shipmentID'] . '</td>
@@ -70,13 +68,10 @@
 					<td align="left">' . $row['productID'] . '</td>
 					<td align="left">' . $row['numberOfUnits'] . '</td>
 					<td align="left">' . $row['street'] . ', ' . $row['city'] . ', ' . $row['state'] . ' ' . $row['zip'] . '</td>
-					<td>
-					<button type="submit" id="AcceptShipmentButton" name="AcceptShipmentButton" class="" value="' . $row['shipmentID'] . '">Accept Shipment</button>
-					</td>
 				</tr>';
 			}
 			?>
 		</table>
-
+	</div>
 </body>
 </html>

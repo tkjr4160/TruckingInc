@@ -1,11 +1,15 @@
+<!--
+
+-->
+
 <?php
 
 session_start();
 include ('../mysqli_connect.php');
 require ('CheckSignedOut.php');
 
-$user = $_POST['CustomerUsername']; $user = htmlentities($user);
-$pass = $_POST['CustomerPassword']; $pass = htmlentities($pass);
+$user = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['CustomerUsername'])));
+$pass = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['CustomerPassword'])));
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {

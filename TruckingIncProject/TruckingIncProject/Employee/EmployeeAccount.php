@@ -6,45 +6,84 @@
 
 <!DOCTYPE HTML>
 <html>
-
 <head>
-    <title>Employee Account</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../css/main.css" rel="stylesheet" type="text/css">
+	<title>Employee Account</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../Styles.css">
 </head>
-
-<header>
-    <div class="banner">
-        <img src="../images/TruckingIncLogo.png" alt="Logo" id="logo">
-        <div id=session>
-            <h3>Session Info</h3>
-            <!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
-            <form action="EmployeeHomeHelper.php" method="POST" class="Form">
-                <div class="FormDiv">
-                    <p class="FormDivPar">
-                        <button type="submit" id="EmployeeSignOutButton" name="EmployeeSignOutButton" class="FormDivParButton" value="EmployeeSignOut">Log Out</button>
-                    </p>
-                </div>
-            </form>
-        </div>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="EmployeeHome.php">Employee Home</a></a></li>
-            <li><a class="active" href="EmployeeAccount.php">My Account</a></li>
-            <li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
-            <li><a href="EmployeeTakeJob.php">Find Job</a></li>
-            <li><a href="EmployeeAssignTruck.php">Assign Truck</a></li>
-            <li><a href="EmployeeResuply.php">Resupply</a></li>
-            <li style="float:right; border-left: 1px solid grey; border-right: none"><a href="../TruckingIncHome.php">Website
-                    Home</a></li>
-        </ul>
-    </nav>
-</header>
-
 <body>
+	<div id="banner">
+		<img src="../Pictures/TruckingIncLogo.png" alt="Logo" id="logo">
+	</div>
+	<div class="Div">
+		<a href="EmployeeHome.php">Employee Home</a>
+		<a href="../TruckingIncHome.php">Website Home</a>
+	</div>
+	<div id="form">
+	<form action="EmployeeAccountHelper.php" method="post" class="Form">
+		<div class="FormDiv">
+			<table align="center" cellspacing="3" cellpadding="3" width="50%" class="FormDivTable">
+			<tr class="FormDivTableTr">
+			<td align="left" class="FormDivTableTrTd"><b>ID</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Name</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Street</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>City</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>State</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Zip</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Phone</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Email</b></td>
+			</tr>
+			<tr class="FormDivTableTr">
+			<?php
+					echo '
+					<td align="left" class="FormDivTableTrTd">' . $row['employeeID'] . '</td>
+					<td align="left" class="FormDivTableTrTd">' . $row['firstName'] . ' ' . $row['middleInitial'] . ' ' . $row['lastName'] . '</td>
+					<td align="left" class="FormDivTableTrTd"><input type="text" id="streetChange" name="streetChange" class="FormDivTableTrTdText" value="' . $row['street'] . '" size="5" maxlength="30"/></td>
+					<td align="left" class="FormDivTableTrTd"><input type="text" id="cityChange" name="cityChange" class="FormDivTableTrTdText" value="' . $row['city'] . '" size="5" maxlength="30"/></td>
 
+					<td align="left" class="FormDivTableTrTd"><select id="stateChange" name="stateChange" class="FormDivTableTrTdSel">
+						<option value="' . $row['state'] . '">' . $row['state'] . '</option>
+						<option value="AL">AL</option> <option value="AK">AK</option> <option value="AZ">AZ</option> <option value="AR">AR</option> <option value="CA">CA</option>
+						<option value="CO">CO</option> <option value="CT">CT</option> <option value="DE">DE</option> <option value="FL">FL</option> <option value="GA">GA</option>
+						<option value="HI">HI</option> <option value="ID">ID</option> <option value="IL">IL</option> <option value="IN">IN</option> <option value="IA">IA</option>
+						<option value="KS">KS</option> <option value="KY">KY</option> <option value="LA">LA</option> <option value="ME">ME</option> <option value="MD">MD</option>
+						<option value="MA">MA</option> <option value="MI">MI</option> <option value="MN">MN</option> <option value="MS">MS</option> <option value="MO">MO</option>
+						<option value="MT">MT</option> <option value="NE">NE</option> <option value="NV">NV</option> <option value="NH">NH</option> <option value="NJ">NJ</option>
+						<option value="NM">NM</option> <option value="NY">NY</option> <option value="NC">NC</option> <option value="ND">ND</option> <option value="OH">OH</option>
+						<option value="OK">OK</option> <option value="OR">OR</option> <option value="PA">PA</option> <option value="RI">RI</option> <option value="SC">SC</option>
+						<option value="SD">SD</option> <option value="TN">TN</option> <option value="TX">TX</option> <option value="UT">UT</option> <option value="VT">VT</option>
+						<option value="VA">VA</option> <option value="WA">WA</option> <option value="WV">WV</option> <option value="WI">WI</option> <option value="WY">WY</option>
+					</select></td>
+
+					<td align="left" class="FormDivTableTrTd"><input type="text" id="zipChange" name="zipChange" class="FormDivTableTrTdText" value="' . $row['zip'] . '" size="2" maxlength="10"/></td>
+					<td align="left" class="FormDivTableTrTd"><input type="text" id="phoneChange" name="phoneChange" class="FormDivTableTrTdText" value="' . $row['phone'] . '" size="5" maxlength="12"/></td>
+					<td align="left" class="FormDivTableTrTd"><input type="text" id="emailChange" name="emailChange" class="FormDivTableTrTdText" value="' . $row['email'] . '" size="10" maxlength="50"/></td>
+
+					<td align="left" class="FormDivTableTrTd">
+						<button type="submit" id="ChangeAccountDetailsButton" name="ChangeAccountDetailsButton" class="FormDivTableTrTdButton" value="' . $row['employeeID'] . '">Update</button>
+					</td>';
+			?>
+			</tr>
+			</table>
+		</div>
+	</form>
+	<form action="EmployeeAccountHelper.php" method="post" class="Form">
+		<div class="FormDiv">
+			<table align="center" cellspacing="3" cellpadding="3" width="50%" class="FormDivTable">
+			<tr class="FormDivTableTr">
+			<td align="left" class="FormDivTableTrTd"><b>Current Password: </b></td>
+			<td align="left" class="FormDivTableTrTd"><b>New Password: </b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Repeat New Password: </b></td>
+			</tr>
+			<tr class="FormDivTableTr">
+			<td align="left" class="FormDivTableTrTd"><input type="password" name="CurrentPassword" id="CurrentPassword" class="FormDivTableTrTdText" size="20" maxlength="30"/ required></td>
+			<td align="left" class="FormDivTableTrTd"><input type="password" name="NewPassword" id="NewPassword" class="FormDivTableTrTdText" size="20" maxlength="30" required/></td>
+			<td align="left" class="FormDivTableTrTd"><input type="password" name="RepeatNewPassword" id="RepeatNewPassword" class="FormDivTableTrTdText" size="20" maxlength="30" required/></td>
+			<td align="left" class="FormDivTableTrTd"><button name="ChangePasswordButton" id="ChangePasswordButton" class="FormDivTableTrTdButton" value="ChangePassword">Change Password</button></td>
+			</tr>
+			</table>
+		</div>
+	</form>
+	</div>
 </body>
-
-</html> 
+</html>

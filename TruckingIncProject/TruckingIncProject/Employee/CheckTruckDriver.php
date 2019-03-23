@@ -1,6 +1,9 @@
+<!--
+
+-->
+
 <?php
 
-session_start();
 include ('../mysqli_connect.php');
 
 $CheckPositionQuery = "Select position From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";

@@ -6,52 +6,21 @@
 
 <!DOCTYPE HTML>
 <html>
-
 <head>
-    <title>Manage Trucks</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../css/main.css" rel="stylesheet" type="text/css">
+	<title>Employee Assign Truck</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../Styles.css">
 </head>
-
-<header>
-    <div class="banner">
-        <img src="../images/TruckingIncLogo.png" alt="Logo" id="logo">
-        <div id=session>
-            <h3>Session Info</h3>
-            <!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
-            <form action="EmployeeHomeHelper.php" method="POST" class="Form">
-                <div class="FormDiv">
-                    <p class="FormDivPar">
-                        <button type="submit" id="EmployeeSignOutButton" name="EmployeeSignOutButton" class="FormDivParButton" value="EmployeeSignOut">Log Out</button>
-                    </p>
-                </div>
-            </form>
-        </div>
-    </div>
-    <nav>
-        <ul>
-            <li><a class="active" href="EmployeeHome.php">Employee Home</a></a></li>
-            <li><a href="EmployeeAccount.php">My Account</a></li>
-            <li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
-            <li><a href="EmployeeTakeJob.php">Find Job</a></li>
-            <li><a href="EmployeeAssignTruck.php">Assign Truck</a></li>
-            <li><a href="EmployeeResuply.php">Resupply</a></li>
-            <li style="float:right; border-left: 1px solid grey; border-right: none"><a href="../TruckingIncHome.php">Website
-                    Home</a></li>
-        </ul>
-    </nav>
-</header>
-
 <body>
-
-    <div align="center">
-        <h1>Truck Management</h1>
-    </div>
-    &nbsp;
-
-<!-- -------------------------------- Assign Trucks -------------------------------- -->
-<div align="center"><h3>Assign Trucks</h3></div>
+	<div id="banner">
+		<img src="../Pictures/TruckingIncLogo.png" alt="Logo" id="logo">
+	</div>
+	<div class="Div">
+		<a href="EmployeeHome.php">Employee Home</a>
+		<a href="../TruckingIncHome.php">Website Home</a>
+	</div>
+	<div id="form">
+	<div align="center"><h3>Assign Trucks</h3></div>
 	<form action="EmployeeAssignTruck.php" method="POST" class="Form">
 		<div class="FormDiv">
 			<table align="center" cellspacing="3" cellpadding="3" width="50%">
@@ -199,5 +168,6 @@
 			?>
 		</table>
 	</form>
-	</body>
+	</div>
+</body>
 </html>

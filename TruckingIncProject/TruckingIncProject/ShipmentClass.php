@@ -17,7 +17,7 @@ class Shipment
 	function getShippingFee() 		{return $this->shippingFee;}
 	function getStatus() 			{return $this->status;}
 
-	function setEmployeeID($employeeID) 				{$this->employeeID = $employeeID;}
+	function setEmployeeID(employeeID) 				{$this->employeeID = $employeeID;}
 	function setMileageUsed($mileageUsed) 				{$this->mileageUsed = $mileageUsed;}
 	function setTruckMaintenanceCosts($truckMaintenanceCosts) 	{$this->truckMaintenanceCosts = $truckMaintenanceCosts;}
 	function setfuelCosts($fuelCosts) 				{$this->fuelCosts = $fuelCosts;}

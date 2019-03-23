@@ -2,47 +2,50 @@
 
 -->
 
-<?php include "CustomerOrderHistoryHelper.php"; ?>
+<?php include ('CustomerOrderHistoryHelper.php'); ?>
 
 <!DOCTYPE HTML>
 <html>
-
 <head>
-    <title>Customer Order History</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../css/main.css" rel="stylesheet" type="text/css">
+	<title>Order History</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../Styles.css">
 </head>
-
-<header>
-    <div class="banner">
-        <img src="../images/TruckingIncLogo.png" alt="Logo" id="logo">
-        <div id=session>
-            <h3>Session Info</h3>
-            <!-- Submitting to "CustomerSignIn.php" -- needs to submit to "CustomerHomeHelper.php" -->
-            <form action="CustomerSignIn.php" method="post" class="Form">
-                <div class="FormDiv">
-                    <p class="FormDivPar">
-                        <button type="submit" id="CustomerSignOutButton" name="CustomerSignOutButton" class="FormDivParButton" value="CustomerSignOut">Log Out</button>
-                    </p>
-                </div>
-            </form>
-        </div>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="CustomerHome.php">Customer Home</a></li>
-            <li><a href="CustomerCreateOrder.php">New Order</a></li>
-            <li><a class="active" href="CustomerOrderHistory.php">Order History</a></li>
-            <li><a href="CustomerAccount.php">My Account</a></li>
-            <li style="float:right; border-left: 1px solid grey; border-right: #0D407A"><a href="../TruckingIncHome.php">Website
-                    Home</a></li>
-        </ul>
-    </nav>
-</header>
-
 <body>
-
+	<div id="banner">
+		<img src="../Pictures/TruckingIncLogo.png" alt="Logo" id= "logo">
+	</div>
+	<div class="Div">
+		<a href="CustomerHome.php">Customer Home</a>
+		<a href="../TruckingIncHome.php">Website Home</a>
+	</div>
+	<div id="form">
+	<form action="CustomerOrderHistoryHelper.php" method="post" class="Form">
+		<div class="FormDiv">
+			<table align="center" cellspacing="3" cellpadding="3" width="50%" class="FormDivTable">
+			<tr class="FormDivTableTr">
+			<td align="left" class="FormDivTableTrTd"><b>Product ID</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Shipping Fee</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Number of Units</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Total Cost</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Status</b></td>
+			</tr>
+			<?php
+			while ($row = mysqli_fetch_array($FindTransactionsExecution))
+			{
+				echo '
+				<tr class="FormDivTableTr">
+				<td align="left" class="FormDivTableTrTd">' . $row['productID'] . '</td>
+				<td align="left" class="FormDivTableTrTd">' . $row['shippingFee'] . '</td>
+				<td align="left" class="FormDivTableTrTd">' . $row['numberOfUnits'] . '</td>
+				<td align="left" class="FormDivTableTrTd">' . $row['TotalCost'] . '</td>
+				<td align="left" class="FormDivTableTrTd">' . $row['transactionStatus'] . '</td>
+				</tr>';
+			}
+			?>
+			</table>
+		</div>
+	</form>
+	</div>
 </body>
-
-</html> 
+</html>
