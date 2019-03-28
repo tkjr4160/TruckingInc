@@ -27,20 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   if ($_POST['CustomerSubmitButton'] == 'RegisterCustomer')
   {
 
-    if (empty($user) || empty($pass) || empty($rptPass) || empty($fn) || empty($mi) || empty($ln) || empty($str) || empty($cty) ||
-        empty($stt) || empty($zp) || empty($phn) || empty($eml))
+    if ($pass != $rptPass)
     {
-      echo '<form action="CustomerSignUp.php">';
-      echo '<p>ERROR! You must to fill out all fields!</p>';
-      echo '<button>Ok</button>';
-      echo '</form>';
-    }
-    else if ($pass != $rptPass)
-    {
-      echo '<form action="CustomerSignUp.php">';
-      echo '<p>ERROR! The passwords do not match!</p>';
-      echo '<button>Ok</button>';
-      echo '</form>';
+      header('Location: CustomerNonMatchingPasswords.php');
     }
     else
     {
@@ -56,12 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       }
       else
       {
-        echo '<h1>System Error</h1>';
-        echo '<form action="CustomerSignUp.php">';
-        echo '<p>Something went wrong...</p>';
-        echo '<button>Ok</button>';
-        echo '</form>';
-
+        header('Location: CustomerUsernameTaken.php');
       }
       mysqli_close($dbc);
     }

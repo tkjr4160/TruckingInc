@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     if ($pass != $rptPass)
     {
-      header('Location: EmployeeWrongPassword.php');
+      header('Location: EmployeeNonMatchingPasswords.php');
     }
     else
     {
@@ -39,15 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $createEmployeeExecution = @mysqli_query($dbc, $createEmployeeQuery);
       if ($createEmployeeExecution)
       {
-        header('Location: EmployeeHome.php');
+        header('Location: EmployeeCreateNewEmployee.php');
       }
       else
       {
-        echo '<h1>System Error</h1>';
-        echo '<form action="EmployeeSignUp.php">';
-        echo '<p>Something went wrong...</p>';
-        echo '<button>Ok</button>';
-        echo '</form>';
+        header('Location: EmployeeUsernameTaken.php');
 
       }
       mysqli_close($dbc);

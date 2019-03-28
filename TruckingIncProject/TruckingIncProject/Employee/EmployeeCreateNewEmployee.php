@@ -16,7 +16,8 @@
 		<img src="../Pictures/TruckingIncLogo.png" alt="Logo" id="logo">
 	</div>
 	<div class="Div">
-		<a href="../TruckingIncHome.php">Back to home</a>
+		<a href="EmployeeHome.php">Employee Home</a>
+		<a href="../TruckingIncHome.php">Website Home</a>
 	</div>
 	<div id="form">
 	<form action="EmployeeCreateNewEmployeeHelper.php" method="post" class="Form">
