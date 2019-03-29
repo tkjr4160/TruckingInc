@@ -21,12 +21,14 @@
 	</div>
 	<div id="form">
 	<div align="center"><h2>View Inventory</h2></div>
-	<div><table align="center" cellspacing="3" cellpadding="3" width="50%">
+	<!-- javascript filter search -->
+	<input type="text" id="userInput" onkeyup="myFunction()" placeholder="Search by name" title="Type in a name">
+	<div><table id="productTable" align="center" cellspacing="3" cellpadding="3" width="50%">
 		<tr>
-		<td align="left"><b>Product ID</b></td>
-		<td align="left"><b>Lumber Type</b></td>
-		<td align="left"><b>Sale Price/Unit</b></td>
-		<td align="left"><b>Stock</b></td>
+		<th align="left"><b>Product ID</b></td>
+		<th align="left"><b>Lumber Type</b></td>
+		<th align="left"><b>Sale Price/Unit</b></td>
+		<th align="left"><b>Stock</b></td>
 		</tr>
 		<?php
 		while ($row = mysqli_fetch_array($viewInventoryExecute))
@@ -44,7 +46,8 @@
 	<!-- -------------------------------- Add Purchase Entries -------------------------------- -->
 	&nbsp;
 	<div align="center"><h2>Add Product Purchase Records</h2></div>
-	<form action="EmployeeResupply.php" method="POST" class="Form">
+	<!-- HTML form confirmation - needs to include a summary? -->
+	<form onsubmit="return confirm('Do you really want to submit the form?');" action="EmployeeResupply.php" method="POST" class="Form">
 	<div class="FormDiv" align="center">
 		
 		<!-- Select product -->
@@ -119,5 +122,25 @@
 		?>
 	</table>
 	</div>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("userInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("productTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 </body>
 </html>

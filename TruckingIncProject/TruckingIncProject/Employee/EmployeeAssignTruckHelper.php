@@ -66,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   }
   
   // *********************** Unassign Trucks ***********************
-
   while ($row = mysqli_fetch_array($EmployeeListExecution2)) {
 
     if ($_POST['UnassignTruckButton'] == $row['employeeID']) {
@@ -93,7 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   // *********************** Add Trucks ***********************
   if ($_POST['AddTruckButton'] == 'AddTruck')
   {
-
     if (empty($addMake) || empty($addModel) || empty($addColor) || empty($addYear) || empty($addLicenseNo) || empty($addPrice))
     {
       echo '<form action="EmployeeAssignTruck.php">';
@@ -135,14 +133,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
       if ($removeTruckExecute) {
         header('Location: EmployeeAssignTruck.php');
-
-        // // If truck was assigned to employee, remove the truckID from that employee
-        // $checkTruckAssignedQuery = 'SELECT employeeID FROM Employee WHERE truckID = ' . $truckid2 . ';';
-        // $checkTruckAssignedExecute = @mysqli_query($dbc, $checkTruckAssignedQuery);
-        // if (!empty($checkTruckAssignedExecute)) {
-          $unassignTruckQuery = 'UPDATE Employee SET truckID = NULL WHERE truckID = ' . $truckid2 . ';';
-          $unassignTruckExectute = @mysqli_query($dbc, $unassignTruckQuery);
-        // }
+        $unassignTruckQuery = 'UPDATE Employee SET truckID = NULL WHERE truckID = ' . $truckid2 . ';';
+        $unassignTruckExectute = @mysqli_query($dbc, $unassignTruckQuery);
       }
       else {
         echo '<h1>System Error</h1>';

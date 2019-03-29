@@ -90,7 +90,7 @@
 		</div>
 	</form>
 
-	<!-- -------------------------------- Add/Remove Trucks -------------------------------- -->
+	<!-- -------------------------------- Add Trucks -------------------------------- -->
 	&nbsp;
 	<div align="center"><h3>Add Trucks</h3></div>
 	<form action="EmployeeAssignTruckHelper.php" method="POST" class="Form">
