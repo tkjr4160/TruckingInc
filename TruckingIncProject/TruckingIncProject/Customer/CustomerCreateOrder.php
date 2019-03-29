@@ -21,7 +21,7 @@
 	</div>
 	<div id="form">
 		<!-- -------------------------------- Create Customer Order --------------------------------  -->
-		<form action="CustomerCreateOrder.php" method="POST" class="Form">
+		<form onsubmit="return confirm('Submit Order?');" action="CustomerCreateOrder.php" method="POST" class="Form">
 		<div align="center" class="FormDiv">
 
 			<!-- Select Lumber Type -->

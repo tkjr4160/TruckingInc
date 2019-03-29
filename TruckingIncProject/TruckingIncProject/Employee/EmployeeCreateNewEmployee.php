@@ -85,8 +85,6 @@
 				<button type="submit" id="EmployeeSubmitButton" name="EmployeeSubmitButton" class="FormDivParText" value="RegisterEmployee">Submit</button>
 				<button type="reset" id="EmployeeResetButton" name="EmployeeResetButton" class="FormDivParButton" value="Reset">Reset</button>
 			</p>
-		</div>
-	</form>
 	</div>
 </body>
 </html>
