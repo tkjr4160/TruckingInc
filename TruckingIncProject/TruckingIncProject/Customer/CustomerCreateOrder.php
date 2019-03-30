@@ -10,6 +10,8 @@
 	<title>Create Order</title>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type= "text/css" href="../Styles.css">
+	<script src="../jquery-3.3.1.js"></script>
+	<script src="../main.js"></script>
 </head>
 <body>
 	<div id="banner">
@@ -21,7 +23,7 @@
 	</div>
 	<div id="form">
 		<!-- -------------------------------- Create Customer Order --------------------------------  -->
-		<form onsubmit="return confirm('Submit Order?');" action="CustomerCreateOrder.php" method="POST" class="Form">
+		<form action="CustomerCreateOrderHelper.php" method="POST" class="Form">
 		<div align="center" class="FormDiv">
 
 			<!-- Select Lumber Type -->
@@ -35,7 +37,7 @@
 					$lumberTypeList .= '<option value="' . $row['lumberType'] . '">' . $row['lumberType'] . '</option>';
 				}
 				?>
-				<select name="SelectLumber<?php $row['lumberType'] ?>">
+				<select id="LumberType" name="LumberType<?php $row['lumberType'] ?>">
 					<option disabled selected="true" value="Lumber">Select Lumber Type</option>
 					<?php echo $lumberTypeList; ?>
 				</select>
@@ -51,13 +53,13 @@
 			<!-- Enter Shipping Address -->
 			<h4>Shipping Address</h4>
 			<p class="FormDivPar">
-			<label class="FormDivParLabel">Street: </label>
-			<input type="text" id="Street" name="Street" class="FormDivParSel" size="5"/>
+				<label class="FormDivParLabel">Street: </label>
+				<input type="text" id="Street" name="Street" class="FormDivParSel" size="5"/>
 			</p>
 
 			<p class="FormDivPar">
-			<label class="FormDivParLabel">City: </label>
-			<input type="text" id="City" name="City" class="FormDivParSel" size="5"/>
+				<label class="FormDivParLabel">City: </label>
+				<input type="text" id="City" name="City" class="FormDivParSel" size="5"/>
 			</p>
 
 			<p class="FormDivPar">
@@ -80,12 +82,62 @@
 			<label class="FormDivParLabel">ZIP: </label>
 			<input type="text" id="ZIP" name="ZIP" class="FormDivParSel" size="5"/>
 			</p>
+		</div>
+		
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
 
-			<!-- Submit Order -->
-			<p class="FormDivPar">
-				<button type="submit" id="CustomerCreateOrderButton" name="CustomerCreateOrderButton" class="FormDivParButton" value="CustomerCreateOrder">Submit</button>
-			</p>
-		</form>
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<div>
+				<table align="center" cellspacing="3" cellpadding="3" width="50%" height="50%">
+					<tr>
+						<td align="right"><b>Lumber Type:</td>
+						<td id="lumberType"></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Quantity:</td>
+						<td id="numberUnits"></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Street:</td>
+						<td id="street"></td>
+					</tr>
+					<tr>
+						<td align="right"><b>City:</td>
+						<td id="city"></td>
+					</tr>
+					<tr>
+						<td align="right"><b>State:</td>
+						<td id="state"></td>
+					</tr>
+					<tr>
+						<td align="right"><b>ZIP:</td>
+						<td id="zip"></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Cost Per Unit:</td>
+						<td id="costPerUnit"></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Shipping Fee:</td>
+						<td id="shippingFee"></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Total Cost:</td>
+						<td id="totalCost"></td>
+					</tr>
+				</table>
+				<button type="submit" id="CustomerCreateOrderButton" name="CustomerCreateOrderButton" class="FormDivParButton" value="CustomerCreateOrder">Submit Order</button>
+			</form>
+				<button id="close" class="FormDivParButton">Cancel Order</button>
+			</div>
+		</div>
+		</div>
+		<!-- Submit Order -->
+		<!-- Trigger/Open  Modal -->
+		<button type="submit" onclick="myFunction()">Review Order</button>
 
 		<!-- List Transaction Information -->
 		&nbsp;
@@ -116,4 +168,33 @@
 		</table>
 	</div>
 </body>
+<script>
+	// Modal pop-up for order confirmation
+	// Get modal
+	var modal = document.getElementById('myModal');
+
+	// Get <span> element that closes modal
+	var span = document.getElementsByClassName("close")[0];
+	var closeBtn = document.getElementById("close");
+
+	//Open modal
+	function modalDisplay() {
+		modal.style.display = "block";
+	}
+
+	// When user clicks on <span> (x), close modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+	closeBtn.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	// When user clicks anywhere outside of modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+</script>
 </html>
