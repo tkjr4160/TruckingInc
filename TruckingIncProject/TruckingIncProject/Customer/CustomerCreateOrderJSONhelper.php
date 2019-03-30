@@ -26,6 +26,11 @@ $productID = $row2['productID'];
 $numInStock = $row2['numInStock'];
 $costPerUnit = $row2['costSoldPerUnit'];
 
+// Retrieve card number and cvv
+$cardNumber = $_POST['CardNumber']; $cardNumber = htmlentities($cardNumber);
+$cvv = $_POST['CVV']; $cvv = htmlentities($cvv);
+
+
 // Calculate total cost of order
 $shippingFee = 1500;
 $totalCost = (intval($numberOfUnits) * intval($costPerUnit)) + intval($shippingFee);
@@ -52,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	  "City" => $city,
 	  "State" => $state,
       "ZIP" => $zip,
+      "CardNumber" => $cardNumber,
+      "CVV" => $cvv,
       "CostPerUnit" => $costPerUnit,
       "ShippingFee" => $shippingFee,
       "TotalCost" => $totalCost

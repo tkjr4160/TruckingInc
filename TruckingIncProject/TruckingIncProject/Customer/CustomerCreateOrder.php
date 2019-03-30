@@ -82,6 +82,16 @@
 			<label class="FormDivParLabel">ZIP: </label>
 			<input type="text" id="ZIP" name="ZIP" class="FormDivParSel" size="5"/>
 			</p>
+
+			<p class="FormDivPar">
+			<label class="FormDivParLabel">Card Number: </label>
+			<input type="text" id="CardNumber" name="CardNumber" class="FormDivParSel" size="16" maxlength="16"/>
+			</p>
+
+			<p class="FormDivPar">
+			<label class="FormDivParLabel">CVV: </label>
+			<input type="text" id="CVV" name="CVV" class="FormDivParSel" size="3" maxlength="3"/>
+			</p>
 		</div>
 		
 		<!-- The Modal -->
@@ -115,6 +125,14 @@
 					<tr>
 						<td align="right"><b>ZIP:</td>
 						<td id="zip"></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Card Number:</td>
+						<td id="cardNumber"></td>
+					</tr>
+					<tr>
+						<td align="right"><b>CVV:</td>
+						<td id="cvv"></td>
 					</tr>
 					<tr>
 						<td align="right"><b>Cost Per Unit:</td>

@@ -11,7 +11,7 @@
 //</script>
 
 // CustomerCreateOrder.php
-// Pull data from form, send to helper, send back
+// Pull data from form, send to helper, grab JSON
 function myFunction() {
 	console.log('myFunction started');
 	jQuery.post("CustomerCreateOrderJSONhelper.php", {
@@ -20,7 +20,9 @@ function myFunction() {
 		"Street": document.getElementById("Street").value,
 		"City": document.getElementById("City").value,
 		"State": document.getElementById("State").value,
-		"ZIP": document.getElementById("ZIP").value
+		"ZIP": document.getElementById("ZIP").value,
+		"CardNumber": document.getElementById("CardNumber").value,
+		"CVV": document.getElementById("CVV").value
 	}, function(data) {
 		document.getElementById("lumberType").innerHTML = data['LumberType'];
 		document.getElementById("numberUnits").innerHTML = data['NumberUnits'];
@@ -28,6 +30,8 @@ function myFunction() {
 		document.getElementById("city").innerHTML = data['City'];
 		document.getElementById("state").innerHTML = data['State'];
 		document.getElementById("zip").innerHTML = data['ZIP'];
+		document.getElementById("cardNumber").innerHTML = data['CardNumber'];
+		document.getElementById("cvv").innerHTML = data['CVV'];
 		document.getElementById("costPerUnit").innerHTML = data['CostPerUnit'];
 		document.getElementById("shippingFee").innerHTML = data['ShippingFee'];
 		document.getElementById("totalCost").innerHTML = data['TotalCost'];
