@@ -17,12 +17,12 @@ $EmployeeListQuery2 = "SELECT employeeID, truckID FROM Employee WHERE position =
 $EmployeeListExecution2 = @mysqli_query($dbc, $EmployeeListQuery2);
 
 // *********************** Add Trucks ***********************
-$addMake = $_POST['TruckMake']; $addMake = htmlentities($addMake);
-$addModel = $_POST['TruckModel']; $addModel = htmlentities($addModel);
-$addColor = $_POST['TruckColor']; $addColor = htmlentities($addColor);
-$addYear = $_POST['TruckYear']; $addYear = htmlentities($addYear);
-$addLicenseNo = $_POST['LicenseNum']; $addLicenseNo = htmlentities($addLicenseNo);
-$addPrice = $_POST['PurchasePrice']; $addPrice = htmlentities($addPrice);
+$addMake = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['TruckMake'])));
+$addModel = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['TruckModel'])));
+$addColor = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['TruckColor'])));
+$addYear = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['TruckYear'])));
+$addLicenseNo = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['LicenseNum'])));
+$addPrice = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['PurchasePrice'])));
 
 // *********************** List & Remove Trucks ***********************
 $TruckTableQuery = "SELECT Truck.*, Employee.employeeID FROM Truck LEFT JOIN Employee ON (Truck.truckID = Employee.truckID);";

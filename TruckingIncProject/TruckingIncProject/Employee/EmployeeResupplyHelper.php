@@ -17,10 +17,10 @@ $viewHistoryExecute = @mysqli_query($dbc, $viewHistoryQuery);
 
 // ********************** Add Product Purchase Records *************************
 // --- Pull data from form ---
-$costPerUnit = $_POST['CostPerUnit']; $costPerUnit = htmlentities($costPerUnit);
-$quantity = $_POST['Quantity']; $quantity = htmlentities($quantity);
-$vendorName = $_POST['SelectVendor']; $vendorName = htmlentities($vendorName);
-$productName = $_POST['SelectProduct']; $productName = htmlentities($productName);
+$costPerUnit = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['CostPerUnit'])));
+$quantity = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['Quantity'])));
+$vendorName = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['SelectVendor'])));
+$productName = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['SelectProduct'])));
 
 // --- Product Name ---
 $productNameQuery = "SELECT lumberType FROM Product";

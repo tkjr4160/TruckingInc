@@ -24,18 +24,31 @@
 		</div>
 		<form action="EmployeeSignInHelper.php" method="post" class="Form">
 			<div class="FormDiv">
-				<p class="FormDivPar">
-					<label class="FormDivParLabel">Username: </label>
-					<input type="text" id="EmployeeUsername" name="EmployeeUsername" class="FormDivParText" size="20" maxlength="30" required/>
-				</p>
-				<p class="FormDivPar">
-					<label class="FormDivParLabel">Password: </label>
-					<input type="password" id="EmployeePassword" name="EmployeePassword" class="FormDivParText" size="20" maxlength="30" required/>
-				</p>
-				<p class="FormDivPar">
-					<button type="submit" id="EmployeeSubmitButton" name="EmployeeSubmitButton" class="FormDivParButton" value="EmployeeSignIn">Submit</button>
-					<button type="reset" id="EmployeeResetButton" name="EmployeeResetButton" class="FormDivParButton" value="Reset">Reset</button>
-				</p>
+				<table align="center" cellspacing="3" cellpadding="3" width="50%" class="FormDivTable">
+				<tr class="FormDivPar">
+					<td align="left" class="FormDivTableTrTd">
+						<label class="FormDivParLabel">Username: </label>
+					</td>
+					<td align="left" class="FormDivTableTrTd">
+						<input type="text" id="EmployeeUsername" name="EmployeeUsername" class="FormDivParText" size="20" maxlength="30" required/>
+					</td>
+				</tr>
+				<tr class="FormDivPar">
+					<td align="left" class="FormDivTableTrTd">
+						<label class="FormDivParLabel">Password: </label>
+					<td align="left" class="FormDivTableTrTd">
+						<input type="password" id="EmployeePassword" name="EmployeePassword" class="FormDivParText" size="20" maxlength="30" required/>
+					</td>
+				</tr>
+				<tr class="FormDivPar">
+					<td align="left" class="FormDivTableTrTd">
+					</td>
+					<td align="left" class="FormDivTableTrTd">
+						<button type="submit" id="EmployeeSubmitButton" name="EmployeeSubmitButton" class="FormDivParButton" value="EmployeeSignIn">Submit</button>
+						<button type="reset" id="EmployeeResetButton" name="EmployeeResetButton" class="FormDivParButton" value="Reset">Reset</button>
+					</td>
+				</tr>
+				</table>
 			</div>
 		</form>
 		<div class="Div">

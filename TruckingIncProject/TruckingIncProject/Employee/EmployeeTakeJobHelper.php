@@ -21,7 +21,7 @@ $row = mysqli_fetch_array($employeeIDExecute);
 $employeeID = $row['employeeID'];
 
 // Retrieve shipments where currently logged-in employee is assigned (but not completed)
-$currentJobsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits 
+$currentJobsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits
 FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID) 
 WHERE Shipment.employeeID = ' . $employeeID . ' AND Transact.transactionStatus = "A"';
 $currentJobsExecute = @mysqli_query($dbc, $currentJobsQuery);
@@ -31,7 +31,7 @@ while ($row = mysqli_fetch_array($currentJobsExecute)) {
 }
 
 // Retrieve shipments that currently logged-in employee has completed
-$completedJobsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits 
+$completedJobsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits
 FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID) 
 WHERE Shipment.employeeID = ' . $employeeID . ' AND Transact.transactionStatus = "C"';
 $completedJobsExecute = @mysqli_query($dbc, $completedJobsQuery);
@@ -41,11 +41,11 @@ while ($row = mysqli_fetch_array($completedJobsExecute)) {
 }
 
 // Retrieve data from update shipment form
-$mileageUsed = $_POST['MileageUsed']; $mileageUsed = htmlentities($mileageUsed);
-$maintenanceCosts = $_POST['TruckMaintenanceCosts']; $maintenanceCosts = htmlentities($maintenanceCosts);
-$fuelCosts = $_POST['FuelCosts']; $fuelCosts = htmlentities($fuelCosts);
-$shipmentID2 = $_POST['ShipmentID']; $shipmentID2 = htmlentities($shipmentID2);
-$transactionID2 = $_POST['TransactionID']; $transactionID2 = htmlentities($transactionID2);
+$mileageUsed = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['MileageUsed'])));
+$maintenanceCosts = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['TruckMaintenanceCosts'])));
+$fuelCosts = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['FuelCosts'])));
+$shipmentID2 = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['ShipmentID'])));
+$transactionID2 = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['TransactionID'])));
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

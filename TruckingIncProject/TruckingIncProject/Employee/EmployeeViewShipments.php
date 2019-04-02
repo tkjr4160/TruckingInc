@@ -34,13 +34,14 @@
 			<td align="left" class="FormDivTableTrTd"><b>Number of Units</b></td>
 			<td align="left" class="FormDivTableTrTd"><b>Total Cost</b></td>
 			<td align="left" class="FormDivTableTrTd"><b>Status</b></td>
+			<td align="left" class="FormDivTableTrTd"><b>Last Updated</b></td>
 			</tr>
 			<?php
 			while ($row = mysqli_fetch_array($FindTransactionsExecution))
 			{
 				$transactionID = $row['transactionID'];
-				$FindShipmentsQuery = "Select * From Shipment Where transactionID = '$transactionID'";
-		    $FindShipmentsExecution = @mysqli_query($dbc, $FindShipmentsQuery);
+				$FindShipmentsQuery = 'SELECT * FROM Shipment WHERE transactionID = ' . $transactionID . '';
+		   		$FindShipmentsExecution = @mysqli_query($dbc, $FindShipmentsQuery);
 
 				if (!$FindShipmentsExecution)
 				{
@@ -63,8 +64,9 @@
 					<td align="left" class="FormDivTableTrTd">' . $row1['fuelCosts'] . '</td>
 					<td align="left" class="FormDivTableTrTd">' . $row['shippingFee'] . '</td>
 					<td align="left" class="FormDivTableTrTd">' . $row['numberOfUnits'] . '</td>
-					<td align="left" class="FormDivTableTrTd">' . $row['TotalCost'] . '</td>
+					<td align="left" class="FormDivTableTrTd">' . $row['totalCost'] . '</td>
 					<td align="left" class="FormDivTableTrTd">' . $row['transactionStatus'] . '</td>
+					<td align="left" class="FormDivTableTrTd">' . $row1['dt'] . '</td>
 					</tr>';
 				}
 			}

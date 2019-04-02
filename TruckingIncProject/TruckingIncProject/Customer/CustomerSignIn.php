@@ -16,13 +16,6 @@
 			margin-top: 50px;
 		}
 	</style>
-	<script src="jquery-3.3.1.min.js"></script>
-	<script>
-		$(document).ready(function()
-		{
-
-		});
-	</script>
 </head>
 <body>
 	<div class="Login">
@@ -31,18 +24,32 @@
 		</div>
 		<form action="CustomerSignInHelper.php" method="post" class="Form">
 			<div class="FormDiv">
-				<p class="FormDivPar">
-					<label class="FormDivParLabel">Username: </label>
-					<input type="text" id="CustomerUsername" name="CustomerUsername" class="FormDivParText" size="20" maxlength="30" required/>
-				</p>
-				<p class="FormDivPar">
-					<label class="FormDivParLabel">Password: </label>
-					<input type="password" id="CustomerPassword" name="CustomerPassword" class="FormDivParText" size="20" maxlength="30" required/>
-				</p>
-				<p class="FormDivPar">
-					<button type="submit" id="CustomerSubmitButton" name="CustomerSubmitButton" class="FormDivParButton" value="CustomerSignIn">Submit</button>
-					<button type="reset" id="CustomerResetButton" name="CustomerResetButton" class="FormDivParButton" value="Reset">Reset</button>
-				</p>
+				<table align="center" cellspacing="3" cellpadding="3" width="50%" class="FormDivTable">
+				<tr class="FormDivPar">
+					<td align="left" class="FormDivTableTrTd">
+						<label class="FormDivParLabel">Username: </label>
+					</td>
+					<td align="left" class="FormDivTableTrTd">
+						<input type="text" id="CustomerUsername" name="CustomerUsername" class="FormDivParText" size="20" maxlength="30" required/>
+					</td>
+				</tr>
+				<tr class="FormDivPar">
+					<td align="left" class="FormDivTableTrTd">
+						<label class="FormDivParLabel">Password: </label>
+					</td>
+					<td align="left" class="FormDivTableTrTd">
+						<input type="password" id="CustomerPassword" name="CustomerPassword" class="FormDivParText" size="20" maxlength="30" required/>
+					</td>
+				</tr>
+				<tr class="FormDivPar">
+					<td align="left" class="FormDivTableTrTd">
+					</td>
+					<td align="left" class="FormDivTableTrTd">
+						<button type="submit" id="CustomerSubmitButton" name="CustomerSubmitButton" class="FormDivParButton" value="CustomerSignIn">Submit</button>
+						<button type="reset" id="CustomerResetButton" name="CustomerResetButton" class="FormDivParButton" value="Reset">Reset</button>
+					</td>
+				</tr>
+				</table>
 			</div>
 		</form>
 		<div class="Div">

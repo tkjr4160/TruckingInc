@@ -95,37 +95,68 @@
 	<div align="center"><h3>Add Trucks</h3></div>
 	<form action="EmployeeAssignTruckHelper.php" method="POST" class="Form">
 		<div class="FormDiv" align="center">
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">Make: </label>
-				<select id="TruckMake" name="TruckMake" class="FormDivParSel">
-					<option value="Volvo">Volvo</option> 
-					<option value="Kenworth">Kenworth</option> 
-					<option value="GMC">GMC</option>
-					<option value="MercendesBenz">Mercedes Benz</option> 
-					<option value="Chevrolet">Chevrolet</option> 
-				</select>
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">Model: </label>
-				<input type="text" id="TruckModel" name="TruckModel" class="FormDivParText" size="15" maxlength="30"/>
-			</p>
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">Color: </label>
-				<input type="text" id="TruckColor" name="TruckColor" class="FormDivParText" size="15" maxlength="30"/>
-			</p>
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">Year: </label>
-				<input type="text" id="TruckYear" name="TruckYear" class="FormDivParText" size="15" maxlength="4"/>
-			</p>
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">License Number: </label>
-				<input type="text" id="LicenseNum" name="LicenseNum" class="FormDivParText" size="15" maxlength="30"/>
-			</p>
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">Purchase Price: </label>
-				<input type="text" id="PurchasePrice" name="PurchasePrice" class="FormDivParText" size="15" maxlength="6"/>
-			<p class="FormDivPar">
-				<button type="submit" id="AddTruckButton" name="AddTruckButton" class="FormDivParText" value="AddTruck">Add Truck</button>
-			</p>
+			<table>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">Make: </label>
+					</td>
+					<td>
+						<select id="TruckMake" name="TruckMake" class="FormDivParSel">
+						<option value="Volvo">Volvo</option> 
+						<option value="Kenworth">Kenworth</option> 
+						<option value="GMC">GMC</option>
+						<option value="MercendesBenz">Mercedes Benz</option> 
+						<option value="Chevrolet">Chevrolet</option> 
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">Model: </label>
+					</td>
+					<td>
+						<input type="text" id="TruckModel" name="TruckModel" class="FormDivParText" size="15" maxlength="30"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">Color: </label>
+					</td>
+					<td>
+						<input type="text" id="TruckColor" name="TruckColor" class="FormDivParText" size="15" maxlength="30"/>
+					</td>
+				<tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">Year: </label>
+					</td>
+					<td>
+						<input type="text" id="TruckYear" name="TruckYear" class="FormDivParText" size="15" maxlength="4"/>
+					</td>
+				<tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">License Number: </label>
+					</td>
+					<td>
+						<input type="text" id="LicenseNum" name="LicenseNum" class="FormDivParText" size="15" maxlength="30"/>
+					</td>
+				<tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">Purchase Price: </label>
+					</td>
+					<td>
+						<input type="text" id="PurchasePrice" name="PurchasePrice" class="FormDivParText" size="15" maxlength="6"/>
+					</td>
+				<tr>
+				<tr>
+					<td></td>
+					<td>
+						<button type="submit" id="AddTruckButton" name="AddTruckButton" class="FormDivParText" value="AddTruck">Add Truck</button>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</form>
 
@@ -142,6 +173,7 @@
 				<td align="left"><b>Model</b></td>
 				<td align="left"><b>Color</b></td>
 				<td align="left"><b>Year</b></td>
+				<td align="left"><b>Date Purchased</b></td>
 				<td align="left"><b>License Number</b></td>
 				<td align="left"><b>Purchase Price</b></td>
 				<td align="left"><b>In Use</b></td>
@@ -156,6 +188,7 @@
 					<td>' . $row['model'] . '</td>
 					<td>' . $row['color'] . '</td>
 					<td>' . $row['year'] . '</td>
+					<td>' . $row['dt'] . '</td>
 					<td>' . $row['licenseNo'] . '</td>
 					<td>' . $row['priceBoughtFor'] . '</td>
 					<td>' . $row['inUse'] . '</td>

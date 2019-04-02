@@ -26,72 +26,100 @@
 		<form action="CustomerCreateOrderHelper.php" method="POST" class="Form">
 		<div align="center" class="FormDiv">
 
-			<!-- Select Lumber Type -->
-			<h4>Lumber Choices</h4>
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">Lumber Type: </label>
-				<?php
-				$lumberTypeList = '';
-				while ($row = mysqli_fetch_array($lumberTypeExecution)) 
-				{
-					$lumberTypeList .= '<option value="' . $row['lumberType'] . '">' . $row['lumberType'] . '</option>';
-				}
-				?>
-				<select id="LumberType" name="LumberType<?php $row['lumberType'] ?>">
-					<option disabled selected="true" value="Lumber">Select Lumber Type</option>
-					<?php echo $lumberTypeList; ?>
-				</select>
-			</p>
-			
-			<!-- Enter Quantity -->
-			<p class="FormDivPar">
-				
-				<label class="FormDivParLabel">Number of Units: </label>
-				<input type="text" id="NumberUnits" name="NumberUnits" class="FormDivParSel" size="5"/>
-			</p>
-
-			<!-- Enter Shipping Address -->
-			<h4>Shipping Address</h4>
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">Street: </label>
-				<input type="text" id="Street" name="Street" class="FormDivParSel" size="5"/>
-			</p>
-
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">City: </label>
-				<input type="text" id="City" name="City" class="FormDivParSel" size="5"/>
-			</p>
-
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">State: </label>
-				<select id="State" name="State" class="FormDivParSel">
-				<option value="AL">AL</option> <option value="AK">AK</option> <option value="AZ">AZ</option> <option value="AR">AR</option> <option value="CA">CA</option>
-				<option value="CO">CO</option> <option value="CT">CT</option> <option value="DE">DE</option> <option value="FL">FL</option> <option value="GA">GA</option>
-				<option value="HI">HI</option> <option value="ID">ID</option> <option value="IL">IL</option> <option value="IN">IN</option> <option value="IA">IA</option>
-				<option value="KS">KS</option> <option value="KY">KY</option> <option value="LA">LA</option> <option value="ME">ME</option> <option value="MD">MD</option>
-				<option value="MA">MA</option> <option value="MI">MI</option> <option value="MN">MN</option> <option value="MS">MS</option> <option value="MO">MO</option>
-				<option value="MT">MT</option> <option value="NE">NE</option> <option value="NV">NV</option> <option value="NH">NH</option> <option value="NJ">NJ</option>
-				<option value="NM">NM</option> <option value="NY">NY</option> <option value="NC">NC</option> <option value="ND">ND</option> <option value="OH">OH</option>
-				<option value="OK">OK</option> <option value="OR">OR</option> <option value="PA">PA</option> <option value="RI">RI</option> <option value="SC">SC</option>
-				<option value="SD">SD</option> <option value="TN">TN</option> <option value="TX">TX</option> <option value="UT">UT</option> <option value="VT">VT</option>
-				<option value="VA">VA</option> <option value="WA">WA</option> <option value="WV">WV</option> <option value="WI">WI</option> <option value="WY">WY</option>
-				</select>
-			</p>
-
-			<p class="FormDivPar">
-			<label class="FormDivParLabel">ZIP: </label>
-			<input type="text" id="ZIP" name="ZIP" class="FormDivParSel" size="5"/>
-			</p>
-
-			<p class="FormDivPar">
-			<label class="FormDivParLabel">Card Number: </label>
-			<input type="text" id="CardNumber" name="CardNumber" class="FormDivParSel" size="16" maxlength="16"/>
-			</p>
-
-			<p class="FormDivPar">
-			<label class="FormDivParLabel">CVV: </label>
-			<input type="text" id="CVV" name="CVV" class="FormDivParSel" size="3" maxlength="3"/>
-			</p>
+		<h3>Order Lumber</h3>
+			<table>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">Lumber Type: </label>	
+					</td>
+					<td>
+						<?php
+						$lumberTypeList = '';
+						while ($row = mysqli_fetch_array($lumberTypeExecution)) 
+						{
+							$lumberTypeList .= '<option value="' . $row['lumberType'] . '">' . $row['lumberType'] . '</option>';
+						}
+						?>
+						<select id="LumberType" name="LumberType<?php $row['lumberType'] ?>">
+							<option disabled selected="true" value="Lumber">Select Lumber Type</option>
+							<?php echo $lumberTypeList; ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">Number of Units: </label>
+					</td>
+					<td>
+						<input type="text" id="NumberUnits" name="NumberUnits" class="FormDivParSel" size="5"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">Street: </label>
+					</td>
+					<td>
+						<input type="text" id="Street" name="Street" class="FormDivParSel" size="5"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">City: </label>
+					</td>
+					<td>
+						<input type="text" id="City" name="City" class="FormDivParSel" size="5"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">State: </label>
+					</td>
+					<td>
+						<select id="State" name="State" class="FormDivParSel">
+						<option value="AL">AL</option> <option value="AK">AK</option> <option value="AZ">AZ</option> <option value="AR">AR</option> <option value="CA">CA</option>
+						<option value="CO">CO</option> <option value="CT">CT</option> <option value="DE">DE</option> <option value="FL">FL</option> <option value="GA">GA</option>
+						<option value="HI">HI</option> <option value="ID">ID</option> <option value="IL">IL</option> <option value="IN">IN</option> <option value="IA">IA</option>
+						<option value="KS">KS</option> <option value="KY">KY</option> <option value="LA">LA</option> <option value="ME">ME</option> <option value="MD">MD</option>
+						<option value="MA">MA</option> <option value="MI">MI</option> <option value="MN">MN</option> <option value="MS">MS</option> <option value="MO">MO</option>
+						<option value="MT">MT</option> <option value="NE">NE</option> <option value="NV">NV</option> <option value="NH">NH</option> <option value="NJ">NJ</option>
+						<option value="NM">NM</option> <option value="NY">NY</option> <option value="NC">NC</option> <option value="ND">ND</option> <option value="OH">OH</option>
+						<option value="OK">OK</option> <option value="OR">OR</option> <option value="PA">PA</option> <option value="RI">RI</option> <option value="SC">SC</option>
+						<option value="SD">SD</option> <option value="TN">TN</option> <option value="TX">TX</option> <option value="UT">UT</option> <option value="VT">VT</option>
+						<option value="VA">VA</option> <option value="WA">WA</option> <option value="WV">WV</option> <option value="WI">WI</option> <option value="WY">WY</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">ZIP: </label>
+					</td>
+					<td>
+						<input type="text" id="ZIP" name="ZIP" class="FormDivParSel" size="5"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">Card Number: </label>
+					</td>
+					<td>
+						<input type="text" id="CardNumber" name="CardNumber" class="FormDivParSel" size="16" maxlength="16"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="FormDivParLabel">CVV: </label>
+					</td>
+					<td>
+						<input type="text" id="CVV" name="CVV" class="FormDivParSel" size="3" maxlength="3"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+					</td>
+				</tr>
+			</table>
 		</div>
 		
 		<!-- The Modal -->
@@ -158,7 +186,7 @@
 		<button type="submit" onclick="myFunction()">Review Order</button>
 
 		<!-- List Transaction Information -->
-		&nbsp;
+		&nbsp;&nbsp;&nbsp;
 		<div align="center"><h3>Transaction History</h3></div>
 		<div class="FormDiv">
 		<table align="center" cellspacing="3" cellpadding="3" width="50%">
@@ -169,6 +197,7 @@
 				<td align="left"><b>Shipping Fee</b></td>
 				<td align="left"><b>Total Cost</b></td>
 				<td align="left"><b>Status</b></td>
+				<td align="left"><b>Order Placed On<b></td>
 			</tr>
 			<?php
 			while ($row = mysqli_fetch_array($transactionsExecute))
@@ -180,6 +209,7 @@
 				<td>" . $row['shippingFee'] . "</td>
 				<td>" . $row['totalCost'] . "</td>
 				<td>" . $row['transactionStatus'] . "</td>
+				<td>" . $row['dt'] . "</td>
 				</tr>";
 			}
 			?>

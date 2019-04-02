@@ -51,48 +51,67 @@
 	<div class="FormDiv" align="center">
 		
 		<!-- Select product -->
-		<p class="FormDivPar">
-			<label class="FormDivParLabel">Product: </label>
-			<?php
-			$productIDList = '';
-			while ($row = mysqli_fetch_array($productNameExecute)) 
-			{
-				$productIDList .= '<option value="' . $row['lumberType'] . '">' . $row['lumberType'] . '</option>';
-			}
-			?>
-			<select name="SelectProduct<?php echo $row['lumberType']; ?>">
-				<option disabled selected="true" value="SelectProduct">Select Product</option>
-				<?php echo $productIDList; ?>
-			</select>
-		</p>
+		<table>
+			<tr>
+				<td>
+					<label class="FormDivParLabel">Product: </label>
+				</td>
+				<td>
+					<?php
+					$productIDList = '';
+					while ($row = mysqli_fetch_array($productNameExecute)) 
+					{
+						$productIDList .= '<option value="' . $row['lumberType'] . '">' . $row['lumberType'] . '</option>';
+					}
+					?>
+					<select name="SelectProduct<?php echo $row['lumberType']; ?>">
+						<option disabled selected="true" value="SelectProduct">Select Product</option>
+						<?php echo $productIDList; ?>
+					</select>
+				</td>
+			</tr>
+				<td>
+					<label class="FormDivParLabel">Vendor: </label>
+				</td>
+				<td>
+					<?php
+					$vendorList = '';
+					while ($row = mysqli_fetch_array($vendorNameExecute)) 
+					{
+						$vendorList .= '<option value="' . $row['companyName'] . '">' . $row['companyName'] . '</option>';
+					}
+					?>
+					<select name="SelectVendor<?php echo $row['vendor']; ?>">
+						<option disabled selected="true" value="SelectVendor">Select Vendor</option>
+						<?php echo $vendorList; ?>
+					</select>
+				</td>
+			<tr>
+				<td>
+					<label class="FormDivParLabel">Cost Per Unit: </label>
+				</td>
+				<td>
+					<input type="text" id="CostPerUnit" name="CostPerUnit" class="FormDivParText" size="15" maxlength="30"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label class="FormDivParLabel">Quantity: </label>
+				</td>
+				<td>
+					<input type="text" id="Quantity" name="Quantity" class="FormDivParText" size="15" maxlength="4"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+					<button type="Submit" id="AddPurchaseRecord" name="AddPurchaseRecord" class="FormDivParText" value="AddPurchaseRecord">Submit</button>
+				</td>
+			</tr>
 
-		<!-- Select Vendor -->
-		<p class="FormDivPar">
-			<label class="FormDivParLabel">Vendor: </label>
-			<?php
-			$vendorList = '';
-			while ($row = mysqli_fetch_array($vendorNameExecute)) 
-			{
-				$vendorList .= '<option value="' . $row['companyName'] . '">' . $row['companyName'] . '</option>';
-			}
-			?>
-			<select name="SelectVendor<?php echo $row['vendor']; ?>">
-				<option disabled selected="true" value="SelectVendor">Select Vendor</option>
-				<?php echo $vendorList; ?>
-			</select>
-		</p>
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">Cost Per Unit: </label>
-				<input type="text" id="CostPerUnit" name="CostPerUnit" class="FormDivParText" size="15" maxlength="30"/>
-			</p>
-			<p class="FormDivPar">
-				<label class="FormDivParLabel">Quantity: </label>
-				<input type="text" id="Quantity" name="Quantity" class="FormDivParText" size="15" maxlength="4"/>
-			</p>
-			<p class="FormDivPar">
-				<button type="Submit" id="AddPurchaseRecord" name="AddPurchaseRecord" class="FormDivParText" value="AddPurchaseRecord">Submit</button>
-			</p>
-		</div>
+		</table>
+	</div>
 	</form>
 
 	<!-- -------------------------------- List Purchase Entries -------------------------------- -->
