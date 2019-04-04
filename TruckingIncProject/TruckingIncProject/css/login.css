@@ -1,12 +1,12 @@
 body{
 
-	background: url(Pictures/Gradient-blue.jpg) no-repeat center center fixed;
+	background: url(../images/Gradient-blue.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
-	-moz-background-size:cover;
-	background-size:cover;
+	-moz-background-size: cover;
+	background-size: cover;
 	}
 
-.Login {
+.login {
 	margin: auto;
 	position: absolute;
 	width: 660px;

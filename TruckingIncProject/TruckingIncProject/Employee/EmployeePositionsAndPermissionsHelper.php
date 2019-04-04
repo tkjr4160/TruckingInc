@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
       if ($ChangePosPermExecution)
       {
-        header('Location: PermissionsChangedConfirmation.php');
+        header('Location: EmployeePositionsAndPermissions.php');
       }
       else
       {

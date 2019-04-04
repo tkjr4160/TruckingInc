@@ -22,7 +22,7 @@ $employeeID = $row['employeeID'];
 
 // Retrieve shipments where currently logged-in employee is assigned (but not completed)
 $currentJobsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits
-FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID) 
+FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID)
 WHERE Shipment.employeeID = ' . $employeeID . ' AND Transact.transactionStatus = "A"';
 $currentJobsExecute = @mysqli_query($dbc, $currentJobsQuery);
 $currentJobsArray = array();
@@ -32,7 +32,7 @@ while ($row = mysqli_fetch_array($currentJobsExecute)) {
 
 // Retrieve shipments that currently logged-in employee has completed
 $completedJobsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits
-FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID) 
+FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID)
 WHERE Shipment.employeeID = ' . $employeeID . ' AND Transact.transactionStatus = "C"';
 $completedJobsExecute = @mysqli_query($dbc, $completedJobsQuery);
 $completedJobsArray = array();
@@ -69,25 +69,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $updateTransactionExecute = @mysqli_query($dbc, $updateTransactionQuery);
         }
         else {
-          echo 'SQL ERROR: ' . mysqli_error($dbc);
+          header('Location: TakeJobError.php');
         }
       }
     }
   }
 
   // Update accepted shipments
-  if ($_POST['UpdateShipmentButton'] == 'UpdateShipment') {
-    if (empty($mileageUsed) || empty($fuelCosts))
-    {
-      echo '<form action="EmployeeHome.php">';
-      echo '<p>ERROR!</p>';
-      echo ' - Mileage: ' . $mileageUsed;
-      echo 'Maintenance: ' . $maintenanceCosts;
-      echo 'Fuel: ' . $fuelCosts;
-      echo '<button>Ok</button>';
-      echo '</form>';
-    }
-    else {
+  if ($_POST['UpdateShipmentButton'] == 'UpdateShipment')
+  {
+
+
       // Update shipment
       $updateShipmentQuery = 'UPDATE Shipment SET mileageUsed = ' . $mileageUsed . ', truckMaintenanceCosts = ' . $maintenanceCosts . ', fuelCosts = ' . $fuelCosts . ' WHERE shipmentID = ' . $shipmentID2 . '';
       $updateShipmentExecute = @mysqli_query($dbc, $updateShipmentQuery);
@@ -98,18 +90,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $updateTransactionExecute2 = @mysqli_query($dbc, $updateTransactionQuery2);
       }
       else {
-        echo 'SQL ERROR: ' . mysqli_error($dbc);
-        echo ' - shipmentID: ' . $shipmentID2;
-        echo ' Mileage: ' . $mileageUsed;
-        echo ' Maintenance: ' . $maintenanceCosts;
-        echo ' Fuel: ' . $fuelCosts;
+        header ('Location TakeJobError.php');
       }
-    }    
   }
-  
+
   if ($_POST['EmployeeSignOutButton'] == 'EmployeeSignOut')
   {
     $_SESSION = [];
-    header ('Location: EmployeeSignIn.php');
-  } 
+    header ('Location: ../TruckingIncHome.php');
+  }
 }

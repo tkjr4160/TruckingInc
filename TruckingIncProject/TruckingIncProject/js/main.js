@@ -1,17 +1,29 @@
-//<script>
-	//function passwordMask() {
-		//var x = document.getElementById("CustomerPassword", "EmployeePassword", "CustomerRepeatPassword", "CustomerPassword", "EmployeePassword", "EmployeeRepeatPassword");
-		//if (x.type === "password") {
-				//x.type = "text";
-		//} else {
-			//x.type = "password";
-		//}
-	//}
+/* Login/Sign-up Drop-down*/
 
-//</script>
+function openLoginForm() {
+  document.getElementById("login-form").style.display = "block";
+}
 
-// CustomerCreateOrder.php
-// Pull data from form, send to helper, grab JSON
+function closeLoginForm() {
+  document.getElementById("login-form").style.display = "none";
+}
+
+function openSignupForm() {
+  document.getElementById("signup-form").style.display = "block";
+}
+
+function closeSignupForm() {
+  document.getElementById("signup-form").style.display = "none";
+}
+
+function openEmployeeLoginForm() {
+  document.getElementById("employee-login-form").style.display = "block";
+}
+
+function closeEmployeeLoginForm() {
+  document.getElementById("employee-login-form").style.display = "none";
+}
+
 function myFunction() {
 	console.log('myFunction started');
 	jQuery.post("CustomerCreateOrderJSONhelper.php", {

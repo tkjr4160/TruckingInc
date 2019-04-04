@@ -17,12 +17,12 @@ $EmployeeListQuery2 = "SELECT employeeID, truckID FROM Employee WHERE position =
 $EmployeeListExecution2 = @mysqli_query($dbc, $EmployeeListQuery2);
 
 // *********************** Add Trucks ***********************
-$addMake = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['TruckMake'])));
-$addModel = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['TruckModel'])));
-$addColor = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['TruckColor'])));
-$addYear = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['TruckYear'])));
-$addLicenseNo = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['LicenseNum'])));
-$addPrice = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['PurchasePrice'])));
+$addMake = $_POST['TruckMake']; $addMake = htmlentities($addMake);
+$addModel = $_POST['TruckModel']; $addModel = htmlentities($addModel);
+$addColor = $_POST['TruckColor']; $addColor = htmlentities($addColor);
+$addYear = $_POST['TruckYear']; $addYear = htmlentities($addYear);
+$addLicenseNo = $_POST['LicenseNum']; $addLicenseNo = htmlentities($addLicenseNo);
+$addPrice = $_POST['PurchasePrice']; $addPrice = htmlentities($addPrice);
 
 // *********************** List & Remove Trucks ***********************
 $TruckTableQuery = "SELECT Truck.*, Employee.employeeID FROM Truck LEFT JOIN Employee ON (Truck.truckID = Employee.truckID);";
@@ -36,11 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   {
     if (empty($truckid) || empty($employeeid))
     {
-      echo '<form action="EmployeeHome.php">';
-      echo '<p>ERROR! An employee and a truck must be selected to assign a truck!</p>';
-      echo ' truckid: ' . $truckid . ' employeeid: ' . $employeeid;
-      echo '<button>Ok</button>';
-      echo '</form>';
+      header('Location: AssignTruckError.php');
     }
     else
     {
@@ -64,8 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       mysqli_close($dbc);
     }
   }
-  
+
   // *********************** Unassign Trucks ***********************
+
   while ($row = mysqli_fetch_array($EmployeeListExecution2)) {
 
     if ($_POST['UnassignTruckButton'] == $row['employeeID']) {
@@ -79,11 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         header('Location: EmployeeAssignTruck.php');
       }
       else {
-        echo '<h1>System Error</h1>';
-        echo '<form action="EmployeeAssignTruck.php">';
-        echo '<p>There was an error while unassigning truck ' . $truckid2 . ' from employee ' . $employeeid2 . '</p>';
-        echo '<button>Ok</button>';
-        echo '</form>';
+        header('Location: AssignTruckError.php');
       }
       mysqli_close($dbc);
     }
@@ -92,16 +85,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   // *********************** Add Trucks ***********************
   if ($_POST['AddTruckButton'] == 'AddTruck')
   {
+
     if (empty($addMake) || empty($addModel) || empty($addColor) || empty($addYear) || empty($addLicenseNo) || empty($addPrice))
     {
-      echo '<form action="EmployeeAssignTruck.php">';
-      echo '<p>ERROR! You must to fill out all fields!</p>';
-      echo '<button>Ok</button>';
-      echo '</form>';
+      header('Location: AssignTruckError.php');
     }
     else
     {
-      $addTruckQuery = "INSERT INTO Truck (make, model, color, year, licenseNo, priceBoughtFor) 
+      $addTruckQuery = "INSERT INTO Truck (make, model, color, year, licenseNo, priceBoughtFor)
                         VALUES ('$addMake', '$addModel', '$addColor', '$addYear', '$addLicenseNo', '$addPrice');";
       $addTruckExecute = @mysqli_query($dbc, $addTruckQuery);
 
@@ -111,12 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       }
       else
       {
-        echo '<h1>System Error</h1>';
-        echo '<form action="EmployeeAssignTruck.php">';
-        echo '<p>Something went wrong...</p>';
-        echo '<button>Ok</button>';
-        echo '</form>';
-        print('Testing: ' . $addMake . ' - ' . $addModel . ' - ' . $addColor . ' - ' . $addYear . ' - ' . $addLicenseNo  . ' - ' . $addPrice);
+        header('Location: AssignTruckError.php');
       }
       mysqli_close($dbc);
     }
@@ -133,15 +119,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
       if ($removeTruckExecute) {
         header('Location: EmployeeAssignTruck.php');
-        $unassignTruckQuery = 'UPDATE Employee SET truckID = NULL WHERE truckID = ' . $truckid2 . ';';
-        $unassignTruckExectute = @mysqli_query($dbc, $unassignTruckQuery);
+
+        // // If truck was assigned to employee, remove the truckID from that employee
+        // $checkTruckAssignedQuery = 'SELECT employeeID FROM Employee WHERE truckID = ' . $truckid2 . ';';
+        // $checkTruckAssignedExecute = @mysqli_query($dbc, $checkTruckAssignedQuery);
+        // if (!empty($checkTruckAssignedExecute)) {
+          $unassignTruckQuery = 'UPDATE Employee SET truckID = NULL WHERE truckID = ' . $truckid2 . ';';
+          $unassignTruckExectute = @mysqli_query($dbc, $unassignTruckQuery);
+        // }
       }
       else {
-        echo '<h1>System Error</h1>';
-        echo '<form action="EmployeeAssignTruck.php">';
-        echo '<p>There was an error with deleting truck ' . $truckid2 . ' from the database</p>';
-        echo '<button>Ok</button>';
-        echo '</form>';
+        header('Location: AssignTruckError.php');
       }
       mysqli_close($dbc);
     }

@@ -3,7 +3,7 @@
 -->
 
 <?php
-
+error_reporting(E_ERROR | E_PARSE);
 session_start();
 include ('../mysqli_connect.php');
 require ('CheckSignedIn.php');
@@ -16,6 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     session_unset();
     session_destroy();
     setcookie('PHPSESSID', '', time()-3600, '/', '', 0, 0);
-    header ('Location: CustomerSignIn.php');
+    header ('Location: ../TruckingIncHome.php');
   }
 }

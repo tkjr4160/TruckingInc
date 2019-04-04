@@ -5,7 +5,7 @@ require ('CheckSignedIn.php');
 require ('CheckPermissionAorB.php');
 
 // *********************** List Inventory ***********************
-$viewInventoryQuery = "SELECT Product.productID, Product.lumberType,  
+$viewInventoryQuery = "SELECT Product.productID, Product.lumberType,
 Product.costSoldPerUnit, Product.numInStock FROM Product;";
 $viewInventoryExecute = @mysqli_query($dbc, $viewInventoryQuery);
 
@@ -17,14 +17,14 @@ $viewHistoryExecute = @mysqli_query($dbc, $viewHistoryQuery);
 
 // ********************** Add Product Purchase Records *************************
 // --- Pull data from form ---
-$costPerUnit = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['CostPerUnit'])));
-$quantity = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['Quantity'])));
-$vendorName = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['SelectVendor'])));
-$productName = trim(htmlentities(mysqli_real_escape_string($dbc, $_POST['SelectProduct'])));
+$costPerUnit = $_POST['CostPerUnit']; $costPerUnit = htmlentities($costPerUnit);
+$quantity = $_POST['Quantity']; $quantity = htmlentities($quantity);
+$vendorName = $_POST['SelectVendor']; $vendorName = htmlentities($vendorName);
+$productName = $_POST['SelectProduct']; $productName = htmlentities($productName);
 
 // --- Product Name ---
 $productNameQuery = "SELECT lumberType FROM Product";
-$productNameExecute = @mysqli_query($dbc, $productNameQuery); 
+$productNameExecute = @mysqli_query($dbc, $productNameQuery);
 // Retrieve productID based upon productName selection
 $productIDQuery = 'SELECT productID FROM Product WHERE Product.lumberType = "' . $productName . '";';
 $productIDExectute = @mysqli_query($dbc, $productIDQuery);
@@ -51,15 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   {
     if (empty($productID) || empty($vendorID) || empty($costPerUnit) || empty($totalCost) || empty($quantity))
     {
-      echo '<form action="EmployeeResupply.php">';
-      echo "Product ID: " . $productID . " " . gettype($productID) . " ";
-      echo "Vendor ID: " . $vendorID . " " . gettype($vendorID) . " ";
-      echo "Cost per: " . $costPerUnit . " " . gettype($costPerUnit) . " ";
-      echo "Total Cost: " . $totalCost . " " . gettype($totalCost) . " ";
-      echo "Quantity: " . $quantity . " " . gettype($quantity) . " ";
-      echo '<p>ERROR! All fields must be filled!</p>';
-      echo '<button>Ok</button>';
-      echo '</form>';
+      header('Location: ResupplyError.php');
     }
     else
     {
@@ -69,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         if ($addRecordExecute)
         {
-            header('Location: EmployeeResupply.php');
+            header('Location: ResupplyConfirmation.php');
 
             // Update numInStock in Product table (for selected product)
             // Retrieve current stock
@@ -87,16 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
         else
         {
-            echo '<h1>System Error</h1>';
-            echo "Product ID: " . $productID . " " . gettype($productID) . " ";
-            echo "Vendor ID: " . $vendorID . " " . gettype($vendorID) . " ";
-            echo "Cost per: " . $costPerUnit . " " . gettype($costPerUnit) . " ";
-            echo "Total Cost: " . $totalCost . " " . gettype($totalCost) . " ";
-            echo "Quantity: " . $quantity . " " . gettype($quantity) . " ";
-            echo '<form action="EmployeeSignUp.php">';
-            echo '<p>Something went wrong...</p>';
-            echo '<button>Ok</button>';
-            echo '</form>';
+            header('Location: ResupplyError.php');
       }
       mysqli_close($dbc);
     }

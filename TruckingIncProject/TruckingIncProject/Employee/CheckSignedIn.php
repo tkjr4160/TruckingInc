@@ -6,5 +6,5 @@
 
 if (!isset($_SESSION['EmployeeUsername']) || !isset($_SESSION['EmployeePassword']))
 {
-  header ('Location: EmployeeSignIn.php');
+  header ('Location: ../TruckingIncHome.php');
 }

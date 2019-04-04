@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $createEmployeeExecution = @mysqli_query($dbc, $createEmployeeQuery);
       if ($createEmployeeExecution)
       {
-        header('Location: CreateEmployeeConfirmation.php');
+        header('Location: EmployeeHome.php');
       }
       else
       {

@@ -14,7 +14,7 @@
     <img src="../Pictures/TruckingIncLogo.png" alt="Logo" id= "logo">
   </div>
   <h1>ERROR!</h1>
-  <form action="CustomerSignIn.php" method="post">
+  <form action="../TruckingIncHome.php" method="post">
   <p>You entered the wrong password for this user account!</p>
   <button type="submit">Ok</button>
 <body>

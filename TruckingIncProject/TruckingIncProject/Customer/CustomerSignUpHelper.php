@@ -6,7 +6,6 @@
 
 session_start();
 include ('../mysqli_connect.php');
-require ('CheckSignedOut.php');
 
 $user = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['CustomerUsername'])));
 $pass = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['CustomerPassword'])));
@@ -27,7 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   if ($_POST['CustomerSubmitButton'] == 'RegisterCustomer')
   {
 
-    if ($pass != $rptPass)
+    if (empty($user) || empty($pass) || empty($rptPass) || empty($fn) || empty($mi) || empty($ln) || empty($str) || empty($cty) ||
+        empty($stt) || empty($zp) || empty($phn) || empty($eml))
+    {
+      echo '<form action="CustomerSignUp.php">';
+      echo '<p>ERROR! You must to fill out all fields!</p>';
+      echo '<button>Ok</button>';
+      echo '</form>';
+    }
+    else if ($pass != $rptPass)
     {
       header('Location: CustomerNonMatchingPasswords.php');
     }

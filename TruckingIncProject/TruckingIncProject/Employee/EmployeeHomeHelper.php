@@ -17,6 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     session_unset();
     session_destroy();
     setcookie('PHPSESSID', '', time()-3600, '/', '', 0, 0);
-    header ('Location: EmployeeSignIn.php');
+    header ('Location: ../TruckingIncHome.php');
   }
 }

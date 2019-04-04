@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if ($_POST['CustomerCreateOrderButton'] == 'CustomerCreateOrder')
     {
         // (remove echoes with values output -- they were for testing)
-        if (empty($customerID) || empty($productID) || empty($totalCost) || empty($numberOfUnits) || empty($street) || empty($city) || 
+        if (empty($customerID) || empty($productID) || empty($totalCost) || empty($numberOfUnits) || empty($street) || empty($city) ||
         empty($state) || empty($zip) || empty($card) || empty($cvv))
         {
             echo '<form action="CustomerCreateOrder.php">';
@@ -69,7 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             echo '</form>';
         }
         else
-        {            
+        {
+          if (intval($numInStock) >= intval($numberOfUnits))
+          {
             // Create new transaction query
             $createOrderQuery= 'INSERT INTO Transact (customerID, productID, numberOfUnits, shippingFee, totalCost, transactionStatus)
             VALUES (' . $customerID . ', ' . $productID . ', ' . $numberOfUnits . ', ' . $shippingFee . ', ' . $totalCost . ', "N")';
@@ -82,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 // Grab transactionID of the transaction created above
                 $transactionID = mysqli_insert_id($dbc);
                 // Create new shipment query
-                $createShipmentQuery = 'INSERT INTO Shipment (transactionID, street, city, state, zip) 
+                $createShipmentQuery = 'INSERT INTO Shipment (transactionID, street, city, state, zip)
                 VALUES ("' . $transactionID . '", "' . $street . '", "' . $city . '", "' . $state . '", "' . $zip . '")';
 
                 // Calculate updated stock
@@ -91,38 +93,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 $updateStockQuery = 'UPDATE Product SET numInStock = ' . $updatedStock . ' WHERE Product.productID = ' . $productID . ';';
 
                 // if the company has enough of [selected product] in stock
-                if (intval($numInStock) >= intval($numberOfUnits)) 
-                {
-                    // Update stock and create new shipment
-                    $updateExecute = @mysqli_query($dbc, $updateStockQuery);
-                    $createShipmentExecute = @mysqli_query($dbc, $createShipmentQuery);
+                // Update stock and create new shipment
+                $updateExecute = @mysqli_query($dbc, $updateStockQuery);
+                $createShipmentExecute = @mysqli_query($dbc, $createShipmentQuery);
 
-                    // If shipment is created successfully
-                    if ($createShipmentExecute) 
-                    {
-                        header('Location: OrderSubmissionConfirmation.php');
-                        mysqli_close($dbc);
-                    }
-                    else 
-                    {
-                        echo 'Shipment could not be created.&nbsp;
-                        SQL ERROR: ' . mysqli_error($dbc);
-                    }
-                }
-                else 
+                // If shipment is created successfully
+                if ($createShipmentExecute)
                 {
-                    echo '<form action="CustomerCreateOrder.php">';
-                    echo '<p>ERROR! Not enough product in stock!</p>';
-                    echo '<button>Ok</button>';
-                    echo '</form>';
+                  header('Location: OrderSubmissionConfirmation.php');
+                  mysqli_close($dbc);
                 }
-            }
-            else 
-            {
+                else
+                {
+                  echo 'Shipment could not be created.&nbsp;
+                  SQL ERROR: ' . mysqli_error($dbc);
+                }
+              }
+              else
+              {
                 echo 'Transaction could not be submitted.&nbsp;
                 SQL ERROR: ' . mysqli_error($dbc);
                 echo $createOrderQuery;
-            }               
+              }
+            }
+            else
+            {
+              header('Location: CustomerOrderTooLarge.php');
+            }
         }
     }
 }
@@ -135,14 +132,14 @@ CustomerConfirmOrder.php is in "UnusedPages Folder on Brian's local machine"
     {
         // Execute new transaction query
         $createOrderExecute = @mysqli_query($dbc, $GLOBALS['createOrderQuery']);
-        
+
         // If query executes
         if ($createOrderExecute)
         {
             // Grab transactionID of the transaction created above
             $transactionID = mysqli_insert_id($dbc);
             // Create new shipment query
-            $createShipmentQuery = 'INSERT INTO Shipment (transactionID, street, city, state, zip) 
+            $createShipmentQuery = 'INSERT INTO Shipment (transactionID, street, city, state, zip)
             VALUES ("' . $transactionID . '", "' . $street . '", "' . $city . '", "' . $state . '", "' . $zip . '")';
 
             // Calculate updated stock
@@ -151,25 +148,25 @@ CustomerConfirmOrder.php is in "UnusedPages Folder on Brian's local machine"
             $updateStockQuery = 'UPDATE Product SET numInStock = ' . $updatedStock . ' WHERE Product.productID = ' . $productID . ';';
 
             // if the company has enough of [selected product] in stock
-            if (intval($numInStock) >= intval($numberOfUnits)) 
+            if (intval($numInStock) >= intval($numberOfUnits))
             {
                 // Update stock and create new shipment
                 $updateExecute = @mysqli_query($dbc, $updateStockQuery);
                 $createShipmentExecute = @mysqli_query($dbc, $createShipmentQuery);
 
                 // If shipment is created successfully
-                if ($createShipmentExecute) 
+                if ($createShipmentExecute)
                 {
                     header('Location: OrderSubmissionConfirmation.php');
                     mysqli_close($dbc);
                 }
-                else 
+                else
                 {
                     echo 'Shipment could not be created.&nbsp;
                     SQL ERROR: ' . mysqli_error($dbc);
                 }
             }
-            else 
+            else
             {
                 echo '<form action="CustomerCreateOrder.php">';
                 echo '<p>ERROR! Not enough product in stock!</p>';
@@ -177,12 +174,12 @@ CustomerConfirmOrder.php is in "UnusedPages Folder on Brian's local machine"
                 echo '</form>';
             }
         }
-        else 
+        else
         {
             echo 'Transaction could not be submitted.&nbsp;
             SQL ERROR: ' . mysqli_error($dbc);
             print_r($GLOBALS['createOrderQuery']);
-        }               
+        }
     }
 
 
@@ -207,7 +204,7 @@ CustomerConfirmOrder.php is in "UnusedPages Folder on Brian's local machine"
             echo '</form>';
         }
         else
-        {            
+        {
             // Create new transaction query
             $createOrderQuery= 'INSERT INTO Transact (customerID, productID, numberOfUnits, shippingFee, totalCost, transactionStatus)
             VALUES (' . $customerID . ', ' . $productID . ', ' . $numberOfUnits . ', ' . $shippingFee . ', ' . $totalCost . ', "N")';
@@ -220,7 +217,7 @@ CustomerConfirmOrder.php is in "UnusedPages Folder on Brian's local machine"
                 // Grab transactionID of the transaction created above
                 $transactionID = mysqli_insert_id($dbc);
                 // Create new shipment query
-                $createShipmentQuery = 'INSERT INTO Shipment (transactionID, street, city, state, zip) 
+                $createShipmentQuery = 'INSERT INTO Shipment (transactionID, street, city, state, zip)
                 VALUES ("' . $transactionID . '", "' . $street . '", "' . $city . '", "' . $state . '", "' . $zip . '")';
 
                 // Calculate updated stock
@@ -229,25 +226,25 @@ CustomerConfirmOrder.php is in "UnusedPages Folder on Brian's local machine"
                 $updateStockQuery = 'UPDATE Product SET numInStock = ' . $updatedStock . ' WHERE Product.productID = ' . $productID . ';';
 
                 // if the company has enough of [selected product] in stock
-                if (intval($numInStock) >= intval($numberOfUnits)) 
+                if (intval($numInStock) >= intval($numberOfUnits))
                 {
                     // Update stock and create new shipment
                     $updateExecute = @mysqli_query($dbc, $updateStockQuery);
                     $createShipmentExecute = @mysqli_query($dbc, $createShipmentQuery);
 
                     // If shipment is created successfully
-                    if ($createShipmentExecute) 
+                    if ($createShipmentExecute)
                     {
                         header('Location: OrderSubmissionConfirmation.php');
                         mysqli_close($dbc);
                     }
-                    else 
+                    else
                     {
                         echo 'Shipment could not be created.&nbsp;
                         SQL ERROR: ' . mysqli_error($dbc);
                     }
                 }
-                else 
+                else
                 {
                     echo '<form action="CustomerCreateOrder.php">';
                     echo '<p>ERROR! Not enough product in stock!</p>';
@@ -255,12 +252,12 @@ CustomerConfirmOrder.php is in "UnusedPages Folder on Brian's local machine"
                     echo '</form>';
                 }
             }
-            else 
+            else
             {
                 echo 'Transaction could not be submitted.&nbsp;
                 SQL ERROR: ' . mysqli_error($dbc);
                 print_r($GLOBALS['createOrderQuery']);
-            }               
+            }
         }
     }
 */

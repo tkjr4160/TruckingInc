@@ -3,7 +3,7 @@
 -->
 
 <?php
-
+error_reporting(E_ERROR | E_PARSE);
 session_start();
 include ('../mysqli_connect.php');
 require ('CheckSignedIn.php');
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $ChangeDetailsExecution = @mysqli_query($dbc, $ChangeDetailsQuery);
       if ($ChangeDetailsExecution)
       {
-        header ('Location: CustomerAccount.php');
+        header ('Location: AccountChangeConfirmation.php');
       }
       else
       {
@@ -83,15 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       else
       {
         $_SESSION['EmployeePassword'] = $newPassword;
-        header('Location: CustomerAccount.php');
+        header('Location: AccountChangeConfirmation.php');
       }
     }
     else
     {
-      echo '<form action="CustomerAccount.php">';
-      echo '<p>You must have the correct current password, and your new passwords must match.</p>';
-      echo '<button>Ok</button>';
-      echo '</form>';
+      header('Location: CustomerAccountPasswords.php');
     }
   }
 }

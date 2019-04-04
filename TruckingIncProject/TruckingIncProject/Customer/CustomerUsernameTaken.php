@@ -14,7 +14,7 @@
     <img src="../Pictures/TruckingIncLogo.png" alt="Logo" id= "logo">
   </div>
   <h1>ERROR!</h1>
-  <form action="CustomerSignUp.php" method="post">
+  <form action="../TruckingIncHome.php" method="post">
   <p>Something has gone wrong! You most likely entered a username that has been taken.</p>
   <button type="submit">Ok</button>
 <body>
