@@ -14,45 +14,46 @@ include ('Employee/EmployeeSignInHelper.php');
     <script src="js/main.js"></script>
     <script src="../jquery-3.3.1.js">
     function myFunction()
-    {
-        var passw = document.getElementById("CustomerPassword");
-        var passwr = document.getElementById("CustomerRepeatPassword");
-        var zip = document.getElementById("CustomerZip");
-        var phone = document.getElementById("CustomerPhone");
-        if (!passw.checkValidity())
-        {
-          passw.innerHTML = passw.validationMessage;
-        }
-        else
-        {
-          passw.innerHTML = "";
-        }
-        if (!passwr.checkValidity())
-        {
-          passwr.innerHTML = passwr.validationMessage;
-        }
-        else
-        {
-            passwr.innerHTML = "";
-        }
-        if (!zip.checkValidity())
-        {
-          zip.innerHTML = zip.validationMessage;
-        }
-        else
-        {
-          zip.innerHTML = "";
-        }
-        if (!phone.checkValidity())
-        {
-          phone.innerHTML = phone.validationMessage;
-        }
-        else
-        {
-          phone.innerHTML = "";
-        }
-    }
-    </script>
+		{
+			var passw=document.getElementById("CustomerPassword");
+			var passwr=document.getElementById("CustomerRepeatPassword");
+			var zip=document.getElementById("CustomerZip");
+			var phone=document.getElementById("CustomerPhone");
+		if (!passw.checkValidity()) 
+			{
+		    document.getElementById("CustomerPassword").innerHTML = passw.validationMessage;
+		  	}
+	  	else 
+	  		{
+	    	document.getElementById("CustomerPassword").innerHTML = "";
+	  		} 
+		if (!passwr.checkValidity()) 
+			{
+		    document.getElementById("CustomerRepeatPassword").innerHTML = passwr.validationMessage;
+		  	}
+	  	else 
+	  		{
+	    	document.getElementById("CustomerRepeatPassword").innerHTML = "";
+	  		} 
+		if (!zip.checkValidity()) 
+			{
+		    document.getElementById("CustomerZip").innerHTML = zip.validationMessage;
+		  	}
+	  	else 
+	  		{
+	    	document.getElementById("CustomerZip").innerHTML = "";
+	  		}
+	  	if (!phone.checkValidity()) 
+			{
+		    document.getElementById("CustomerPhone").innerHTML = phone.validationMessage;
+		  	}
+	  	else 
+	  		{
+	    	document.getElementById("CustomerPhone").innerHTML = "";
+	  		} 	  	 
+		}
+	}
+	</script>
 </head>
 
 <body>
@@ -136,7 +137,7 @@ include ('Employee/EmployeeSignInHelper.php');
                     <input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" id="CustomerPassword" name="CustomerPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
                     <br>
                     <label>Repeat Password: </label>
-                    <input title="Password must match" type="password" id="CustomerRepeatPassword" name="CustomerRepeatPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
+                    <input title="Password must contain xat least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" id="CustomerRepeatPassword" name="CustomerRepeatPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
                     <br>
                     <label>First Name: </label>
                     <input type="text" id="CustomerFirstName" name="CustomerFirstName" size="20" maxlength="30" required />

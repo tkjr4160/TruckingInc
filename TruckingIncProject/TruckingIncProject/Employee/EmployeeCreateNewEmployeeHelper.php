@@ -8,6 +8,14 @@ session_start();
 require ('CheckSignedIn.php');
 require ('CheckPermissionA.php');
 
+$CheckPositionQuery = "Select position From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
+$CheckPositionExecution = @mysqli_query($dbc, $CheckPositionQuery);
+$fetchPositionCheck = mysqli_fetch_array($CheckPositionExecution);
+
+$CheckPermissionsQuery = "Select permissionsType From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
+$CheckPermissionsExecution = @mysqli_query($dbc, $CheckPermissionsQuery);
+$fetchPermissionsCheck = mysqli_fetch_array($CheckPermissionsExecution);
+
 $user = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeUsername'])));
 $pass = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeePassword'])));
 $fn = mysqli_real_escape_string($dbc, htmlentities(trim($_POST['EmployeeFirstName'])));
@@ -39,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $createEmployeeExecution = @mysqli_query($dbc, $createEmployeeQuery);
       if ($createEmployeeExecution)
       {
-        header('Location: EmployeeHome.php');
+        header('Location: CreateNewEmployeeConfirmation.php');
       }
       else
       {

@@ -2,6 +2,14 @@
 include ('../mysqli_connect.php');
 session_start();
 
+$CheckPositionQuery = "Select position From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
+$CheckPositionExecution = @mysqli_query($dbc, $CheckPositionQuery);
+$fetchPositionCheck = mysqli_fetch_array($CheckPositionExecution);
+
+$CheckPermissionsQuery = "Select permissionsType From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
+$CheckPermissionsExecution = @mysqli_query($dbc, $CheckPermissionsQuery);
+$fetchPermissionsCheck = mysqli_fetch_array($CheckPermissionsExecution);
+
 require ('CheckSignedIn.php');
 require ('CheckTruckDriver.php');
 
@@ -62,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $assignExecute = @mysqli_query($dbc, $assignQuery);
 
         if ($assignExecute) {
-          header('Location: EmployeeTakeJob.php');
+          header('Location: TakeJobConfirmation.php');
 
           // Update transaction status in Transact table
           $updateTransactionQuery = 'UPDATE Transact SET transactionStatus = "A" WHERE transactionID = ' . $transactionID . ';';
@@ -88,9 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: EmployeeTakeJob.php');
         $updateTransactionQuery2 = 'UPDATE Transact SET transactionStatus = "C" WHERE transactionID = ' . $transactionID2 . '';
         $updateTransactionExecute2 = @mysqli_query($dbc, $updateTransactionQuery2);
+        header('Location: TakeJobConfirmation.php');
       }
       else {
-        header ('Location TakeJobError.php');
+        header ('Location: TakeJobError.php');
       }
   }
 

@@ -36,7 +36,7 @@ $shippingFee = 1500;
 $totalCost = (intval($numberOfUnits) * intval($costPerUnit)) + intval($shippingFee);
 
 // *********************** Data for List Transactions ***********************
-$transactionsQuery = 'SELECT transactionID, productID, numberOfUnits, shippingFee, totalCost, transactionStatus FROM Transact WHERE customerID = ' . $customerID . ';';
+$transactionsQuery = 'SELECT transactionID, productID, numberOfUnits, shippingFee, totalCost, transactionStatus, dt FROM Transact WHERE customerID = ' . $customerID . ';';
 $transactionsExecute = @mysqli_query($dbc, $transactionsQuery);
 
 // *********************** Data for Create Shipment ***********************
@@ -52,10 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // pull values and output JSON
     $values = array(
       "LumberType" => $lumberType,
-	  "NumberUnits" => $numberOfUnits,
-	  "Street" => $street,
-	  "City" => $city,
-	  "State" => $state,
+	    "NumberUnits" => $numberOfUnits,
+	    "Street" => $street,
+	    "City" => $city,
+	    "State" => $state,
       "ZIP" => $zip,
       "CardNumber" => $cardNumber,
       "CVV" => $cvv,

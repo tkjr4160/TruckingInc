@@ -8,6 +8,14 @@ session_start();
 include ('../mysqli_connect.php');
 require ('CheckSignedIn.php');
 
+$CheckPositionQuery = "Select position From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
+$CheckPositionExecution = @mysqli_query($dbc, $CheckPositionQuery);
+$fetchPositionCheck = mysqli_fetch_array($CheckPositionExecution);
+
+$CheckPermissionsQuery = "Select permissionsType From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
+$CheckPermissionsExecution = @mysqli_query($dbc, $CheckPermissionsQuery);
+$fetchPermissionsCheck = mysqli_fetch_array($CheckPermissionsExecution);
+
 $user = $_SESSION['EmployeeUsername'];
 
 $EmployeeDetailsQuery = "Select * from Employee where WebsiteUsername = '$user'";

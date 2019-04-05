@@ -78,12 +78,12 @@
                 <br>
                 <p>
                     <label>New Password:</label>
-                    <input type="password" id="CustomerPassword" name="CustomerPassword" size="20" maxlength="30" required />
+                    <input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" id="CustomerPassword" name="CustomerPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
                 </p>
                 <br>
                 <p>
                     <label>Repeat Password: </label>
-                    <input type="password" id="CustomerRepeatPassword" name="CustomerRepeatPassword" size="20" maxlength="30" required />
+                    <input title="Password must contain xat least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" id="CustomerRepeatPassword" name="CustomerRepeatPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
                 </p>
                 <br>
                 <p>

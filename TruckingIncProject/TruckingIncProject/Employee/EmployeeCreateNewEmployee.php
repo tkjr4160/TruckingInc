@@ -11,46 +11,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../css/main.css" rel="stylesheet" type="text/css">
     <script src="../jquery-3.3.1.js">
-    function myFunction()
-    {
-        var passw = document.getElementById("EmployeePassword");
-        var passwr = document.getElementById("EmployeeRepeatPassword");
-        var zip = document.getElementById("EmployeeZip");
-        var phone = document.getElementById("EmployeePhone");
-        if (!passw.checkValidity())
-        {
-          passw.innerHTML = passw.validationMessage;
-        }
-        else
-        {
-          passw.innerHTML = "";
-        }
-        if (!passwr.checkValidity())
-        {
-          passwr.innerHTML = passwr.validationMessage;
-        }
-        else
-        {
-          passwr.innerHTML = "";
-        }
-        if (!zip.checkValidity())
-        {
-          zip.innerHTML = zip.validationMessage;
-        }
-        else
-        {
-          zip.innerHTML = "";
-        }
-        if (!phone.checkValidity())
-        {
-          phone.innerHTML = phone.validationMessage;
-        }
-        else
-        {
-          phone.innerHTML = "";
-        }
-    }
-    </script>
+	function myFunction()
+		{
+			var passw=document.getElementById("EmployeePassword");
+			var passwr=document.getElementById("EmployeeRepeatPassword");
+			var zip=document.getElementById("EmployeeZip");
+			var phone=document.getElementById("EmployeePhone");
+		if (!passw.checkValidity()) 
+			{
+		    document.getElementById("EmployeePassword").innerHTML = passw.validationMessage;
+		  	}
+	  	else 
+	  		{
+	    	document.getElementById("EmployeePassword").innerHTML = "";
+	  		} 
+		if (!passwr.checkValidity()) 
+			{
+		    document.getElementById("EmployeeRepeatPassword").innerHTML = passwr.validationMessage;
+		  	}
+	  	else 
+	  		{
+	    	document.getElementById("EmployeeRepeatPassword").innerHTML = "";
+	  		} 
+		if (!zip.checkValidity()) 
+			{
+		    document.getElementById("EmployeeZip").innerHTML = zip.validationMessage;
+		  	}
+	  	else 
+	  		{
+	    	document.getElementById("EmployeeZip").innerHTML = "";
+	  		}
+	  	if (!phone.checkValidity()) 
+			{
+		    document.getElementById("EmployeePhone").innerHTML = phone.validationMessage;
+		  	}
+	  	else 
+	  		{
+	    	document.getElementById("EmployeePhone").innerHTML = "";
+	  		} 	  	 
+		}
+	}
+	</script>
 </head>
 <body>
     <header>
@@ -92,10 +93,11 @@
                 <li><a href="EmployeeAccount.php">My Account</a></li>
                 <li><a class="active" href="EmployeeCreateNewEmployee.php">New Employee</a></li>
                 <li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
-                <li><a href="EmployeeTakeJob.php">Find Job</a></li>
+                <?php if ($fetchPositionCheck[0] == 'Truck Driver') {echo '<li><a href="EmployeeTakeJob.php">Find Job</a></li>';}?>
                 <li><a href="EmployeeAssignTruck.php">Truck Management</a></li>
                 <li><a href="EmployeeResupply.php">Inventory</a></li>
                 <li><a href="EmployeeViewShipments.php">View Shipments</a></li>
+                <li><a href="AccountingInfo.php">Accounting Information</a></li>
                 <li style="float:right; width:150px" ;>
                     <!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
                     <form action="EmployeeHomeHelper.php" method="POST" class="Form">
@@ -132,7 +134,7 @@
                                 <label class="FormDivParLabel">New Password: </label>
                             </td>
                             <td>
-                                <input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" id="EmployeePassword" name="EmployeePassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required />
+                                <input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" id="EmployeePassword" name="EmployeePassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
                             </td>
                         </tr>
                         <tr>
@@ -140,7 +142,7 @@
                                 <label class="FormDivParLabel">Repeat Password: </label>
                             </td>
                             <td>
-                                <input title="Password must match" type="password" id="EmployeeRepeatPassword" name="EmployeeRepeatPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
+                                <input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" id="EmployeeRepeatPassword" name="EmployeeRepeatPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
                             </td>
                         </tr>
                         <tr>

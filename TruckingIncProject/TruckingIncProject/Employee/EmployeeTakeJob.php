@@ -56,10 +56,11 @@
                 <li><a href="EmployeeAccount.php">My Account</a></li>
                 <li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>
                 <li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
-                <li><a class="active" href="EmployeeTakeJob.php">Find Job</a></li>
+                <?php if ($fetchPositionCheck[0] == 'Truck Driver') {echo '<li><a class="active" href="EmployeeTakeJob.php">Find Job</a></li>';}?>
                 <li><a href="EmployeeAssignTruck.php">Truck Management</a></li>
                 <li><a href="EmployeeResupply.php">Inventory</a></li>
                 <li><a href="EmployeeViewShipments.php">View Shipments</a></li>
+                <li><a href="AccountingInfo.php">Accounting Information</a></li>
                 <li style="float:right; width:150px" ;>
                     <!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
                     <form action="EmployeeHomeHelper.php" method="POST" class="Form">
@@ -139,9 +140,9 @@
                         <td align="left">' . $row['street'] . ', ' . $row['city'] . ', ' . $row['state'] . ' ' . $row['zip'] . '</td>
                         <td align="left">' . $row['dt'] . '</td>
                         <form action="EmployeeTakeJobHelper.php" method="POST" class="Form">
-                            <td align="left"> <input type="text" id="MileageUsed" name="MileageUsed" class="FormDivParText" size="15" maxlength="6" required/></td>
-                            <td align="left"> <input type="text" id="TruckMaintenanceCosts" name="TruckMaintenanceCosts" class="FormDivParText" size="15" maxlength="6" required/></td>
-                            <td align="left"> <input type="text" id="FuelCosts" name="FuelCosts" class="FormDivParText" size="15" maxlength="6" required/></td>
+                            <td align="left"> <input type="number" id="MileageUsed" name="MileageUsed" class="FormDivParText" size="15" maxlength="6" required/></td>
+                            <td align="left"> <input type="number" id="TruckMaintenanceCosts" name="TruckMaintenanceCosts" class="FormDivParText" size="15" maxlength="6" required/></td>
+                            <td align="left"> <input type="number" id="FuelCosts" name="FuelCosts" class="FormDivParText" size="15" maxlength="6" required/></td>
                             <input type="hidden" value="' . $row['shipmentID'] . '" name="ShipmentID"/>
                             <input type="hidden" value="' . $row['transactionID'] . '" name="TransactionID"/>
                             <td>

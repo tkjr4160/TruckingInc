@@ -54,10 +54,11 @@
             <li><a href="EmployeeAccount.php">My Account</a></li>
             <li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>
             <li><a class="active" href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
-            <li><a href="EmployeeTakeJob.php">Find Job</a></li>
+            <?php if ($fetchPositionCheck[0] == 'Truck Driver') {echo '<li><a href="EmployeeTakeJob.php">Find Job</a></li>';}?>
             <li><a href="EmployeeAssignTruck.php">Truck Management</a></li>
             <li><a href="EmployeeResupply.php">Inventory</a></li>
             <li><a href="EmployeeViewShipments.php">View Shipments</a></li>
+            <li><a href="AccountingInfo.php">Accounting Information</a></li>
             <li style="float:right; width:150px" ;>
                 <!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
                 <form action="EmployeeHomeHelper.php" method="POST" class="Form">
@@ -143,4 +144,4 @@
     </footer>
 </body>
 
-</html> 
+</html>

@@ -54,10 +54,11 @@
                 <li><a href="EmployeeAccount.php">My Account</a></li>
                 <li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>
                 <li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
-                <li><a href="EmployeeTakeJob.php">Find Job</a></li>
+                <?php if ($fetchPositionCheck[0] == 'Truck Driver') {echo '<li><a href="EmployeeTakeJob.php">Find Job</a></li>';}?>
                 <li><a href="EmployeeAssignTruck.php">Truck Management</a></li>
                 <li><a class="active" href="EmployeeResupply.php">Inventory</a></li>
                 <li><a href="EmployeeViewShipments.php">View Shipments</a></li>
+                <li><a href="AccountingInfo.php">Accounting Information</a></li>
                 <li style="float:right; width:150px" ;>
                     <!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
                     <form action="EmployeeHomeHelper.php" method="POST" class="Form">
@@ -153,7 +154,7 @@
                                 <label class="FormDivParLabel">Cost Per Unit: </label>
                             </td>
                             <td>
-                                <input type="text" id="CostPerUnit" name="CostPerUnit" class="FormDivParText" size="15" maxlength="30" required/>
+                                <input type="number" id="CostPerUnit" name="CostPerUnit" class="FormDivParText" size="15" maxlength="30"/>
                             </td>
                         </tr>
                         <tr class="edit-table-row">
@@ -161,7 +162,7 @@
                                 <label class="FormDivParLabel">Quantity: </label>
                             </td>
                             <td>
-                                <input type="text" id="Quantity" name="Quantity" class="FormDivParText" size="15" maxlength="4" required/>
+                                <input type="number" id="Quantity" name="Quantity" class="FormDivParText" size="15" maxlength="4"/>
                             </td>
                         </tr>
                         <tr class="edit-table-row">
@@ -189,7 +190,6 @@
                     <th><b>Quantity</b></th>
                     <th><b>Cost Per Unit</b></th>
                     <th><b>Total Cost</b></th>
-                    <th><b>Date Added</b></th>
                 </tr>
                 <?php
                 while ($row = mysqli_fetch_array($viewHistoryExecute)) {
@@ -199,9 +199,7 @@
 			<td>" . $row['vendorID'] . "</td>
 			<td>" . $row['quantity'] . "</td>
 			<td>" . $row['costBoughtPerUnit'] . "</td>
-            <td>" . $row['totalCost'] . "</td>
-            <td>" . $row['dt'] . "</td>
-
+			<td>" . $row['totalCost'] . "</td>
 			</tr>";
                 }
                 ?>

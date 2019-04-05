@@ -4,6 +4,14 @@ session_start();
 require ('CheckSignedIn.php');
 require ('CheckPermissionAorB.php');
 
+$CheckPositionQuery = "Select position From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
+$CheckPositionExecution = @mysqli_query($dbc, $CheckPositionQuery);
+$fetchPositionCheck = mysqli_fetch_array($CheckPositionExecution);
+
+$CheckPermissionsQuery = "Select permissionsType From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
+$CheckPermissionsExecution = @mysqli_query($dbc, $CheckPermissionsQuery);
+$fetchPermissionsCheck = mysqli_fetch_array($CheckPermissionsExecution);
+
 // *********************** List Inventory ***********************
 $viewInventoryQuery = "SELECT Product.productID, Product.lumberType,
 Product.costSoldPerUnit, Product.numInStock FROM Product;";

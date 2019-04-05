@@ -4,6 +4,14 @@ session_start();
 require ('CheckSignedIn.php');
 require ('CheckPermissionAorBorC.php'); // change to CheckPermissionA.php
 
+$CheckPositionQuery = "Select position From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
+$CheckPositionExecution = @mysqli_query($dbc, $CheckPositionQuery);
+$fetchPositionCheck = mysqli_fetch_array($CheckPositionExecution);
+
+$CheckPermissionsQuery = "Select permissionsType From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
+$CheckPermissionsExecution = @mysqli_query($dbc, $CheckPermissionsQuery);
+$fetchPermissionsCheck = mysqli_fetch_array($CheckPermissionsExecution);
+
 // *********************** Assign Trucks ***********************
 $EmployeeListQuery = "SELECT * FROM Employee WHERE position = 'Truck Driver' AND truckID IS NULL";
 $EmployeeListExecution = @mysqli_query($dbc, $EmployeeListQuery);
@@ -47,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
       if ($updateEmployeeExecution && $updateTruckExecution)
       {
-        header('Location: EmployeeAssignTruck.php');
+        header('Location: AssignTruckConfirmation.php');
       }
       else
       {
@@ -73,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       $updateEmployeeExecute = @mysqli_query($dbc, $updateEmployeeQuery);
 
       if ($updateEmployeeExecute) {
-        header('Location: EmployeeAssignTruck.php');
+        header('Location: AssignTruckConfirmation.php');
       }
       else {
         header('Location: AssignTruckError.php');
@@ -98,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
       if ($addTruckExecute)
       {
-        header('Location: EmployeeAssignTruck.php');
+        header('Location: AssignTruckConfirmation.php');
       }
       else
       {
@@ -114,18 +122,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if ($_POST['RemoveTruckButton'] == $row['truckID']) {
       // Delete selected truck from the database
       $truckid2 = $row['truckID'];
+      $unassignTruckQuery = 'UPDATE Employee SET truckID = NULL WHERE truckID = ' . $truckid2 . ';';
+      $unassignTruckExectute = @mysqli_query($dbc, $unassignTruckQuery);
       $removeTruckQuery = 'DELETE FROM Truck WHERE truckID = ' . $truckid2 . ';';
       $removeTruckExecute = @mysqli_query($dbc, $removeTruckQuery);
 
       if ($removeTruckExecute) {
-        header('Location: EmployeeAssignTruck.php');
+
+        header('Location: AssignTruckConfirmation.php');
 
         // // If truck was assigned to employee, remove the truckID from that employee
         // $checkTruckAssignedQuery = 'SELECT employeeID FROM Employee WHERE truckID = ' . $truckid2 . ';';
         // $checkTruckAssignedExecute = @mysqli_query($dbc, $checkTruckAssignedQuery);
         // if (!empty($checkTruckAssignedExecute)) {
-          $unassignTruckQuery = 'UPDATE Employee SET truckID = NULL WHERE truckID = ' . $truckid2 . ';';
-          $unassignTruckExectute = @mysqli_query($dbc, $unassignTruckQuery);
+
         // }
       }
       else {

@@ -326,6 +326,7 @@
             <br>
          </div>
       </div>
+      </div>
       <footer>
          <div class="location">
             <h1><strong><u>Locations</u></strong></h1>
