@@ -35,6 +35,7 @@
                <br>
                <?php
                   echo '<p><b>Signed in as: <br>' . $_SESSION['EmployeeUsername'] . '</b></p>';
+                  echo '<h6><b>Date: </b>' . date('l, F jS, Y') . '</h6>';
                   ?>
             </div>
             <div class="social-media">
@@ -212,7 +213,7 @@
                            <label class="FormDivParLabel">License Number: </label>
                         </td>
                         <td>
-                          <input title="License number must be a minimum of 6 characters and a maximum of 8 characters" type="text" id="LicenseNum" name="LicenseNum" class="FormDivParText" size="15" maxlength="8" placeholder="111111" pattern="^(?=.*[0-9])\w{6,8}"/>
+                          <input title="License number must be a minimum of 6 characters and a maximum of 8 characters" type="text" id="LicenseNum" name="LicenseNum" class="FormDivParText" size="15" maxlength="8" placeholder="111111" pattern="^(?=.*[0-9])\w{6,8}" required/>
                         </td>
                      <tr>
                      <tr>
@@ -220,7 +221,7 @@
                            <label class="FormDivParLabel">Purchase Price: </label>
                         </td>
                         <td>
-                          <input type="number" id="PurchasePrice" name="PurchasePrice" class="FormDivParText" size="15" maxlength="6"/>
+                          <input type="number" id="PurchasePrice" name="PurchasePrice" class="FormDivParText" size="15" maxlength="6" required/>
                         </td>
                      <tr>
                         <td colspan="2">

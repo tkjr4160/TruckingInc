@@ -19,10 +19,11 @@
 	<header>
 		<div id="banner">
 			<img src="../images/TruckingIncLogo.png" alt="Trucking Inc. Logo">
-			<div id=session style="background-color:aliceblue;">
-				<h3><u>Welcome!</u></h3><br>
-				<p>Please press "Ok" button to return.</p>
-			</div>
+			<h3><u>Welcome!</u></h3><br>
+			<?php
+			echo '<p><b>Signed in as: </b>' . $_SESSION['EmployeeUsername'] . '</p>';
+			echo '<h6><b>Date: </b>' . date('l, F jS, Y') . '</h6>';
+			?>
 			<div class="social-media">
 				<div id="facebook">
 					<a href="https://www.facebook.com/" target="_blank">
@@ -49,7 +50,7 @@
 
 		<nav>
 			<ul>
-			<li style="float:right; width:150px" ;>
+				<li style="float:right; width:150px" ;>
 					<!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
 					<form action="EmployeeHomeHelper.php" method="POST" class="Form">
 						<button type="submit" id="EmployeeSignOutButton" name="EmployeeSignOutButton" class="FormDivParButton" value="EmployeeSignOut">Log Out</button>

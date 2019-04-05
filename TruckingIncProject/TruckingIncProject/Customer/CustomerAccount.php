@@ -62,6 +62,7 @@
                 <h3><u>Welcome!</u></h3><br>
                 <?php
                 echo '<p><b>Signed in as: <br>' . $_SESSION['CustomerUsername'] . '</b></p>';
+                echo '<h6><b>Date: </b>' . date('l, F jS, Y') . '</h6>';
                 ?>
             </div>
             <div class="social-media">
@@ -151,7 +152,7 @@
 
 					<td><input title="Format: xxxxx or xxxxx-xxxx" type="text" id="zipChange" name="zipChange" value="' . $row['zip'] . '" size="5" maxlength="10" placeholder="11111 or 11111-1111" pattern="^\d{5}$|^\d{5}-\d{4}$"/></td>
 					<td><input title="Format: xxx-xxx-xxxx" type="text" id="phoneChange" name="phoneChange" value="' . $row['phone'] . '" size="9" maxlength="12" placeholder="111-111-1111" pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"/></td>
-					<td><input type="text" id="emailChange" name="emailChange" value="' . $row['email'] . '" size="15" maxlength="50" placeholder="email@website.com"/></td>
+					<td><input type="email" id="emailChange" name="emailChange" value="' . $row['email'] . '" size="15" maxlength="50" placeholder="email@website.com" required/></td>
 
 					<td style="background-color: #ffffff; border:none;width:100px;">
 						<button type="submit" id="ChangeAccountDetailsButton" name="ChangeAccountDetailsButton" class="FormDivTableTrTdButton" value="' . $row['customerID'] . '">Update</button>

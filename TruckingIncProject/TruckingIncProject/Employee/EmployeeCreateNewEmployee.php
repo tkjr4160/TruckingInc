@@ -61,6 +61,7 @@
                 <h3><u>Welcome!</u></h3><br>
                 <?php
                 echo '<div class="session"><p><b>Signed in as: <br>' . $_SESSION['EmployeeUsername'] . '</b></p></div>';
+                echo '<h6><b>Date: </b>' . date('l, F jS, Y') . '</h6>';
                 ?>
             </div>
             <div class="social-media">

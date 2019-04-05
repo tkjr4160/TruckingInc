@@ -22,6 +22,7 @@
                 <h3><u>Welcome!</u></h3><br>
                 <?php
                 echo '<p><b>Signed in as: <br>' . $_SESSION['EmployeeUsername'] . '</b></p>';
+                echo '<h6><b>Date: </b>' . date('l, F jS, Y') . '</h6>';
                 ?>
             </div>
             <div class="social-media">
@@ -154,7 +155,7 @@
                                 <label class="FormDivParLabel">Cost Per Unit: </label>
                             </td>
                             <td>
-                                <input type="number" id="CostPerUnit" name="CostPerUnit" class="FormDivParText" size="15" maxlength="30"/>
+                                <input type="number" id="CostPerUnit" name="CostPerUnit" class="FormDivParText" size="15" maxlength="30" required/>
                             </td>
                         </tr>
                         <tr class="edit-table-row">
@@ -162,7 +163,7 @@
                                 <label class="FormDivParLabel">Quantity: </label>
                             </td>
                             <td>
-                                <input type="number" id="Quantity" name="Quantity" class="FormDivParText" size="15" maxlength="4"/>
+                                <input type="number" id="Quantity" name="Quantity" class="FormDivParText" size="15" maxlength="4" required/>
                             </td>
                         </tr>
                         <tr class="edit-table-row">

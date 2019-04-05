@@ -63,6 +63,7 @@
                 <h3><u>Welcome!</u></h3><br>
                 <?php
                 echo '<p><b>Signed in as: <br>' . $_SESSION['EmployeeUsername'] . '</b></p>';
+                echo '<h6><b>Date: </b>' . date('l, F jS, Y') . '</h6>';
                 ?>
             </div>
             <div class="social-media">
@@ -156,7 +157,7 @@
 
 					<td><input title="Format: xxxxx or xxxxx-xxxx" type="text" id="zipChange" name="zipChange" class="FormDivTableTrTdText" value="' . $row['zip'] . '" size="7" maxlength="10" placeholder="11111 or 11111-1111" pattern="^\d{5}$|^\d{5}-\d{4}$"/></td>
 					<td><input title="Format: xxx-xxx-xxxx" type="text" id="phoneChange" name="phoneChange" class="FormDivTableTrTdText" value="' . $row['phone'] . '" size="9" maxlength="12" placeholder="111-111-1111" pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"/></td>
-					<td><input type="text" id="emailChange" name="emailChange" class="FormDivTableTrTdText" value="' . $row['email'] . '" size="18" maxlength="50" placeholder="email@website.com"/></td>
+					<td><input type="email" id="emailChange" name="emailChange" class="FormDivTableTrTdText" value="' . $row['email'] . '" size="18" maxlength="50" placeholder="email@website.com" required/></td>
 
 					<td style="background-color: #ffffff; border:none;width:144px;">
 						<button type="submit" id="ChangeAccountDetailsButton" name="ChangeAccountDetailsButton" class="FormDivTableTrTdButton" value="' . $row['employeeID'] . '">Update</button>
