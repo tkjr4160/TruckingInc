@@ -94,6 +94,7 @@
                 <li><a href="CustomerHome.php">Customer Home</a></li>
                 <li><a class="active" href="CustomerAccount.php">My Account</a></li>
                 <li><a href="CustomerCreateOrder.php">New Order</a></li>
+                <li><a href="CustomerFeedback.php">Customer Feedback</a></li>
                 <li style="float:right; width:150px" ;>
                     <!-- Submitting to "CustomerSignIn.php" -- needs to submit to "CustomerHomeHelper.php" -->
                     <form action="CustomerHomeHelper.php" method="post" class="Form">
@@ -133,8 +134,8 @@
                             echo '
 					<td>' . $row['customerID'] . '</td>
 					<td>' . $row['firstName'] . ' ' . $row['middleInitial'] . ' ' . $row['lastName'] . '</td>
-					<td><input type="text" id="streetChange" name="streetChange" value="' . $row['street'] . '" size="15" maxlength="30"/></td>
-					<td><input type="text" id="cityChange" name="cityChange" value="' . $row['city'] . '" size="5" maxlength="30"/></td>
+					<td><input type="text" id="streetChange" name="streetChange" value="' . $row['street'] . '" size="15" maxlength="30" required/></td>
+					<td><input type="text" id="cityChange" name="cityChange" value="' . $row['city'] . '" size="5" maxlength="30" required/></td>
 
 					<td><select id="stateChange" name="stateChange" class="FormDivTableTrTdSel">
 						<option value="' . $row['state'] . '">' . $row['state'] . '</option>
@@ -150,8 +151,8 @@
 						<option value="VA">VA</option> <option value="WA">WA</option> <option value="WV">WV</option> <option value="WI">WI</option> <option value="WY">WY</option>
 					</select></td>
 
-					<td><input title="Format: xxxxx or xxxxx-xxxx" type="text" id="zipChange" name="zipChange" value="' . $row['zip'] . '" size="5" maxlength="10" placeholder="11111 or 11111-1111" pattern="^\d{5}$|^\d{5}-\d{4}$"/></td>
-					<td><input title="Format: xxx-xxx-xxxx" type="text" id="phoneChange" name="phoneChange" value="' . $row['phone'] . '" size="9" maxlength="12" placeholder="111-111-1111" pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"/></td>
+					<td><input title="Format: xxxxx or xxxxx-xxxx" type="text" id="zipChange" name="zipChange" value="' . $row['zip'] . '" size="5" maxlength="10" placeholder="11111 or 11111-1111" pattern="^\d{5}$|^\d{5}-\d{4}$" required/></td>
+					<td><input title="Format: xxx-xxx-xxxx" type="text" id="phoneChange" name="phoneChange" value="' . $row['phone'] . '" size="9" maxlength="12" placeholder="111-111-1111" pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" required/></td>
 					<td><input type="email" id="emailChange" name="emailChange" value="' . $row['email'] . '" size="15" maxlength="50" placeholder="email@website.com" required/></td>
 
 					<td style="background-color: #ffffff; border:none;width:100px;">
@@ -175,8 +176,8 @@
                     </tr>
                     <tr>
                         <td><input type="password" name="CurrentPassword" id="CurrentPassword" size="20" maxlength="30" required /></td>
-                        <td><input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" name="NewPassword" id="NewPassword" class="FormDivTableTrTdText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required /></td>
-                        <td><input title="Password must match" type="password" name="RepeatNewPassword" id="RepeatNewPassword" class="FormDivTableTrTdText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required /></td>
+                        <td><input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long." type="password" name="NewPassword" id="NewPassword" class="FormDivTableTrTdText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required /></td>
+                        <td><input title="Password must match. Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long." type="password" name="RepeatNewPassword" id="RepeatNewPassword" class="FormDivTableTrTdText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required /></td>
                         <td style="background-color: #ffffff;border: none;width:100px;"><button name="ChangePasswordButton" id="ChangePasswordButton" class="FormDivTableTrTdButton" value="ChangePassword">Confirm</button></td>
                     </tr>
                 </table>

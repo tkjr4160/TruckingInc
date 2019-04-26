@@ -55,6 +55,7 @@
                 <li><a class="active" href="CustomerHome.php">Customer Home</a></li>
                 <li><a href="CustomerAccount.php">My Account</a></li>
                 <li><a href="CustomerCreateOrder.php">New Order</a></li>
+                <li><a href="CustomerFeedback.php">Customer Feedback</a></li>
                 <li style="float:right; width:150px" ;>
                     <!-- Submitting to "CustomerSignIn.php" -- needs to submit to "CustomerHomeHelper.php" -->
                     <form action="CustomerHomeHelper.php" method="post" class="Form">
@@ -175,4 +176,4 @@
     </footer>
 </body>
 
-</html> 
+</html>

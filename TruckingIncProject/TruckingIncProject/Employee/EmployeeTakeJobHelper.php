@@ -1,7 +1,7 @@
 <?php
-include ('../mysqli_connect.php');
 session_start();
-
+require ('CheckSignedIn.php');
+require ('CheckTruckDriver.php');
 $CheckPositionQuery = "Select position From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
 $CheckPositionExecution = @mysqli_query($dbc, $CheckPositionQuery);
 $fetchPositionCheck = mysqli_fetch_array($CheckPositionExecution);
@@ -10,8 +10,7 @@ $CheckPermissionsQuery = "Select permissionsType From Employee Where WebsiteUser
 $CheckPermissionsExecution = @mysqli_query($dbc, $CheckPermissionsQuery);
 $fetchPermissionsCheck = mysqli_fetch_array($CheckPermissionsExecution);
 
-require ('CheckSignedIn.php');
-require ('CheckTruckDriver.php');
+
 
 // Retrieve shipments with no employee assigned
 $shipmentsQuery = 'SELECT Shipment.*, Transact.transactionID, Transact.productID, Transact.numberOfUnits FROM Shipment LEFT JOIN Transact ON (Shipment.transactionID = Transact.transactionID) WHERE employeeID IS NULL';
@@ -93,13 +92,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $updateShipmentExecute = @mysqli_query($dbc, $updateShipmentQuery);
 
       if ($updateShipmentExecute) {
-        header('Location: EmployeeTakeJob.php');
         $updateTransactionQuery2 = 'UPDATE Transact SET transactionStatus = "C" WHERE transactionID = ' . $transactionID2 . '';
         $updateTransactionExecute2 = @mysqli_query($dbc, $updateTransactionQuery2);
         header('Location: TakeJobConfirmation.php');
       }
       else {
-        header ('Location: TakeJobError.php');
+        header ('Location TakeJobError.php');
       }
   }
 

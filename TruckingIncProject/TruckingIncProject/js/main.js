@@ -34,7 +34,8 @@ function myFunction() {
 		"State": document.getElementById("State").value,
 		"ZIP": document.getElementById("ZIP").value,
 		"CardNumber": document.getElementById("CardNumber").value,
-		"CVV": document.getElementById("CVV").value
+		"CVV": document.getElementById("CVV").value,
+		"Expiration": document.getElementById("Expiration").value
 	}, function(data) {
 		document.getElementById("lumberType").innerHTML = data['LumberType'];
 		document.getElementById("numberUnits").innerHTML = data['NumberUnits'];
@@ -44,6 +45,7 @@ function myFunction() {
 		document.getElementById("zip").innerHTML = data['ZIP'];
 		document.getElementById("cardNumber").innerHTML = data['CardNumber'];
 		document.getElementById("cvv").innerHTML = data['CVV'];
+		document.getElementById("expr").innerHTML = data['Expiration'];
 		document.getElementById("costPerUnit").innerHTML = data['CostPerUnit'];
 		document.getElementById("shippingFee").innerHTML = data['ShippingFee'];
 		document.getElementById("totalCost").innerHTML = data['TotalCost'];

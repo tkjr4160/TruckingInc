@@ -51,15 +51,16 @@
 
         <nav>
             <ul>
-                <li><a href="EmployeeHome.php">Employee Home</a></li>
-                <li><a href="EmployeeAccount.php">My Account</a></li>
-                <li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>
-                <li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
-                <?php if ($fetchPositionCheck[0] == 'Truck Driver') {echo '<li><a href="EmployeeTakeJob.php">Find Job</a></li>';}?>
-                <li><a href="EmployeeAssignTruck.php">Truck Management</a></li>
-                <li><a class="active" href="EmployeeResupply.php">Inventory</a></li>
-                <li><a href="EmployeeViewShipments.php">View Shipments</a></li>
-                <li><a href="AccountingInfo.php">Accounting Information</a></li>
+              <li><a href="EmployeeHome.php">Employee Home</a></li>
+              <li><a href="EmployeeAccount.php">My Account</a></li>
+              <?php if ($fetchPermissionsCheck[0] == 'A') {echo '<li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>';}?>
+              <?php if ($fetchPermissionsCheck[0] == 'A') {echo '<li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>';}?>
+              <?php if ($fetchPositionCheck[0] == 'Truck Driver') {echo '<li><a href="EmployeeTakeJob.php">Find Job</a></li>';}?>
+              <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="EmployeeAssignTruck.php">Truck Management</a></li>';}?>
+              <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a class="active" href="EmployeeResupply.php">Inventory</a></li>';}?>
+              <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B' || $fetchPermissionsCheck[0] == 'C') {echo '<li><a href="EmployeeViewShipments.php">View Shipments</a></li>';}?>
+              <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="AccountingInfo.php">Accounting Information</a></li>';}?>
+              <li><a href="Graphs.php">Graphs</a></li>
                 <li style="float:right; width:150px" ;>
                     <!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
                     <form action="EmployeeHomeHelper.php" method="POST" class="Form">
@@ -98,8 +99,8 @@
                         echo "<tr>
 			<td>" . $row['productID'] . "</td>
 			<td>" . $row['lumberType'] . "</td>
-			<td>" . $row['costSoldPerUnit'] . "</td>
-			<td>" . $row['numInStock'] . "</td>
+			<td>$" . number_format($row['costSoldPerUnit'], 2) . "</td>
+			<td>" . number_format($row['numInStock'], 0) . "</td>
 			</tr>";
                     }
                     ?>
@@ -129,8 +130,8 @@
                                     $productIDList .= '<option value="' . $row['lumberType'] . '">' . $row['lumberType'] . '</option>';
                                 }
                                 ?>
-                                <select name="SelectProduct<?php echo $row['lumberType']; ?>" required>
-                                    <option disabled selected="true" value="SelectProduct">Select Product</option>
+                                <select id="SelectProduct" name="SelectProduct<?php echo $row['lumberType']; ?>" required>
+                                    <option selected="true" disabled="disabled" value="">Select Product</option>
                                     <?php echo $productIDList; ?>
                                 </select>
                             </td>
@@ -146,7 +147,7 @@
                             }
                             ?>
                             <select name="SelectVendor<?php echo $row['vendor']; ?>" required>
-                                <option disabled selected="true" value="SelectVendor">Select Vendor</option>
+                                <option disabled selected="true" value="">Select Vendor</option>
                                 <?php echo $vendorList; ?>
                             </select>
                         </td>
@@ -155,7 +156,7 @@
                                 <label class="FormDivParLabel">Cost Per Unit: </label>
                             </td>
                             <td>
-                                <input type="number" id="CostPerUnit" name="CostPerUnit" class="FormDivParText" size="15" maxlength="30" required/>
+                                <input title="This must be a number less than 10,000." type="text" id="CostPerUnit" name="CostPerUnit" class="FormDivParText" size="15" maxlength="30" pattern="[0-9]{1,4}" required/>
                             </td>
                         </tr>
                         <tr class="edit-table-row">
@@ -163,7 +164,7 @@
                                 <label class="FormDivParLabel">Quantity: </label>
                             </td>
                             <td>
-                                <input type="number" id="Quantity" name="Quantity" class="FormDivParText" size="15" maxlength="4" required/>
+                                <input title="This must be a number less than 10,000." type="text" id="Quantity" name="Quantity" class="FormDivParText" size="15" maxlength="4" pattern="[0-9]{1,4}" required/>
                             </td>
                         </tr>
                         <tr class="edit-table-row">
@@ -198,9 +199,9 @@
 			<td>" . $row['purchaseID'] . "</td>
 			<td>" . $row['productID'] . "</td>
 			<td>" . $row['vendorID'] . "</td>
-			<td>" . $row['quantity'] . "</td>
-			<td>" . $row['costBoughtPerUnit'] . "</td>
-			<td>" . $row['totalCost'] . "</td>
+			<td>" . number_format($row['quantity'], 0) . "</td>
+			<td>$" . number_format($row['costBoughtPerUnit'], 2) . "</td>
+			<td>$" . number_format($row['totalCost'], 2) . "</td>
 			</tr>";
                 }
                 ?>

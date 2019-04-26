@@ -1,12 +1,19 @@
 <?php
-include('Customer/CustomerSignInHelper.php');
-include('Customer/CustomerSignUpHelper.php');
-include('Employee/EmployeeSignInHelper.php');
-?>
+include ('Customer/CustomerSignInHelper.php');
+include ('Customer/CustomerSignUpHelper.php');
+include ('Employee/EmployeeSignInHelper.php');
 
+$file = fopen("Count.txt", "r");
+$contents = (int)fread($file, 20);
+fclose($file);
+$contents++;
+$file = fopen("Count.txt", "w");
+fwrite($file, (String)$contents);
+fclose($file);
+
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Trucking Inc.</title>
     <meta charset="utf-8" />
@@ -14,7 +21,47 @@ include('Employee/EmployeeSignInHelper.php');
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link href="css/truckingIncHome.css" rel="stylesheet" type="text/css">
     <script src="js/main.js"></script>
-
+    <script src="../jquery-3.3.1.js">
+    function myFunction()
+    {
+        var passw = document.getElementById("CustomerPassword");
+        var passwr = document.getElementById("CustomerRepeatPassword");
+        var zip = document.getElementById("CustomerZip");
+        var phone = document.getElementById("CustomerPhone");
+        if (!passw.checkValidity())
+        {
+          passw.innerHTML = passw.validationMessage;
+        }
+        else
+        {
+          passw.innerHTML = "";
+        }
+        if (!passwr.checkValidity())
+        {
+          passwr.innerHTML = passwr.validationMessage;
+        }
+        else
+        {
+            passwr.innerHTML = "";
+        }
+        if (!zip.checkValidity())
+        {
+          zip.innerHTML = zip.validationMessage;
+        }
+        else
+        {
+          zip.innerHTML = "";
+        }
+        if (!phone.checkValidity())
+        {
+          phone.innerHTML = phone.validationMessage;
+        }
+        else
+        {
+          phone.innerHTML = "";
+        }
+    }
+    </script>
 </head>
 
 <body>
@@ -95,10 +142,10 @@ include('Employee/EmployeeSignInHelper.php');
                     <input type="text" id="CustomerUsername" name="CustomerUsername" size="20" maxlength="30" required />
                     <br>
                     <label>New Password:</label>
-                    <input type="password" id="CustomerPassword" name="CustomerPassword" size="20" maxlength="30" required />
+                    <input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long." type="password" id="CustomerPassword" name="CustomerPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
                     <br>
                     <label>Repeat Password: </label>
-                    <input type="password" id="CustomerRepeatPassword" name="CustomerRepeatPassword" size="20" maxlength="30" required />
+                    <input title="Password must match. Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long." type="password" id="CustomerRepeatPassword" name="CustomerRepeatPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
                     <br>
                     <label>First Name: </label>
                     <input type="text" id="CustomerFirstName" name="CustomerFirstName" size="20" maxlength="30" required />
@@ -170,13 +217,13 @@ include('Employee/EmployeeSignInHelper.php');
                     </select>
                     <br>
                     <label>Zip: </label><br>
-                    <input type="text" id="CustomerZip" name="CustomerZip" size="15" maxlength="10" required />
+                    <input title="Format: xxxxx or xxxxx-xxxx" type="text" id="CustomerZip" name="CustomerZip" class="FormDivParText" size="15" minlength="5" maxlength="10" placeholder="11111 or 11111-1111" pattern="^\d{5}$|^\d{5}-\d{4}$"required/>
                     <br>
                     <label>Phone: </label><br>
-                    <input type="text" id="CustomerPhone" name="CustomerPhone" size="15" maxlength="12" required />
+                    <input title="Format: xxx-xxx-xxxx"type="text" id="CustomerPhone" name="CustomerPhone" class="FormDivParText" size="15" maxlength="12" placeholder="111-111-1111" pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"required/>
                     <br>
                     <label>Email: </label><br>
-                    <input type="text" id="CustomerEmail" name="CustomerEmail" size="20" maxlength="50" required />
+                    <input type="email" id="CustomerEmail" name="CustomerEmail" class="FormDivParText" size="20" maxlength="50" placeholder="email@website.com" required/>
                     <br>
                     <button type="submit" id="CustomerSubmitButton" name="CustomerSubmitButton" value="RegisterCustomer">Submit</button>
                     <button type="button" id="CustomerResetButton" class="btn cancel" value="Reset" onclick="closeSignupForm()">Close</button>
@@ -294,4 +341,4 @@ include('Employee/EmployeeSignInHelper.php');
     </footer>
 </body>
 
-</html> 
+</html>

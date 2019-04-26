@@ -54,12 +54,14 @@
 			<ul>
 				<li><a href="EmployeeHome.php">Employee Home</a></li>
 				<li><a href="EmployeeAccount.php">My Account</a></li>
-				<li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>
-				<li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
-				<li><a href="EmployeeAssignTruck.php">Truck Management</a></li>
-				<li><a href="EmployeeResupply.php">Inventory</a></li>
-				<li><a href="EmployeeViewShipments.php">View Shipments</a></li>
-				<li><a class="active" href="AccountingInfo.php">Accounting Information</a></li>
+				<?php if ($fetchPermissionsCheck[0] == 'A') {echo '<li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>';}?>
+				<?php if ($fetchPermissionsCheck[0] == 'A') {echo '<li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>';}?>
+				<?php if ($fetchPositionCheck[0] == 'Truck Driver') {echo '<li><a href="EmployeeTakeJob.php">Find Job</a></li>';}?>
+				<?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="EmployeeAssignTruck.php">Truck Management</a></li>';}?>
+				<?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="EmployeeResupply.php">Inventory</a></li>';}?>
+				<?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B' || $fetchPermissionsCheck[0] == 'C') {echo '<li><a href="EmployeeViewShipments.php">View Shipments</a></li>';}?>
+				<?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a class="active" href="AccountingInfo.php">Accounting Information</a></li><li>';}?>
+				<li><a href="Graphs.php">Graphs</a></li>
 				<li style="float:right; width:150px" ;>
 					<!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
 					<form action="EmployeeHomeHelper.php" method="POST" class="Form">
@@ -98,7 +100,7 @@
 						?>
 						<tr class="FormDivTableTr">
 							<th class="FormDivTableTrTd"><b>Total Earned:</b></th>
-							<th class="FormDivTableTrTd"><?php echo $earned; ?></th>
+							<th class="FormDivTableTrTd"><?php echo '$' . number_format($earned, 2); ?></th>
 						</tr>
 					</table>
 					<br>
@@ -120,8 +122,8 @@
 							<th class="FormDivTableTrTd"><b>Fuel Cost</b></th>
 						</tr>
 						<?php
-															echo $ShipmentList;
-															?>
+							echo $ShipmentList;
+						?>
 					</table>
 					<br>
 					<table class="table" style="width:80%;">
@@ -134,8 +136,8 @@
 							<th class="FormDivTableTrTd"><b>Total Amount</b></th>
 						</tr>
 						<?php
-															echo $ProductPurchaseList;
-															?>
+							echo $ProductPurchaseList;
+						?>
 					</table>
 					<br>
 
@@ -147,11 +149,11 @@
 							<th class="FormDivTableTrTd"><b>Price</b></th>
 						</tr>
 						<?php
-															echo $TruckList;
-															?>
+							echo $TruckList;
+						?>
 						<tr class="FormDivTableTr">
 							<th class="FormDivTableTrTd"><b>Total Spent:</b></th>
-							<th class="FormDivTableTrTd"><?php echo $spent; ?></th>
+							<th class="FormDivTableTrTd"><?php echo '$' . number_format($spent, 2); ?></th>
 						</tr>
 					</table>
 				</div>
@@ -161,14 +163,14 @@
 					<h1 style="text-align:center;"><b><u>Balance Sheet</u></b></h1>
 				</div>
 				<div class="FormDiv">
-					<table class="table" id="ProfitLossTable" name="ProfitLossTable" style="width:80%;>
-						<?php
-															echo '<tr class="FormDivTableTr"><td class="FormDivTableTrTd"><b>Balance: </b></td><td class="FormDivTableTrTd">' . $balance . '</td></tr>';
-															echo '<tr class="FormDivTableTr"><td class="FormDivTableTrTd"><b>Total Earned: </b></td><td class="FormDivTableTrTd">' . $earned . '</td></tr>';
-															echo '<tr class="FormDivTableTr"><td class="FormDivTableTrTd"><b>Total Spent: </b></td><td class="FormDivTableTrTd">' . $spent . '</td></tr>';
-															echo '<tr class="FormDivTableTr"><td class="FormDivTableTrTd"><b>Assets: </b></td><td class="FormDivTableTrTd">' . ($truckAssets + $woodAssets) . '</td></tr>';
-															echo '<tr class="FormDivTableTr"><td class="FormDivTableTrTd"><b>Liabilities: </b></td><td class="FormDivTableTrTd">' . ($truckAssets + $woodAssets - $balance) . '</td></tr>';
-															?>
+					<table class="table" id="ProfitLossTable" name="ProfitLossTable" style="width:80%;">
+					<?php
+							echo '<tr class="FormDivTableTr"><td class="FormDivTableTrTd"><b>Balance: </b></td><td class="FormDivTableTrTd">$' . number_format($balance, 2) . '</td></tr>';
+							echo '<tr class="FormDivTableTr"><td class="FormDivTableTrTd"><b>Total Earned: </b></td><td class="FormDivTableTrTd">$' . number_format($earned, 2) . '</td></tr>';
+							echo '<tr class="FormDivTableTr"><td class="FormDivTableTrTd"><b>Total Spent: </b></td><td class="FormDivTableTrTd">$' . number_format($spent, 2) . '</td></tr>';
+							echo '<tr class="FormDivTableTr"><td class="FormDivTableTrTd"><b>Assets: </b></td><td class="FormDivTableTrTd">$' . number_format($truckAssets + $woodAssets, 2) . '</td></tr>';
+							echo '<tr class="FormDivTableTr"><td class="FormDivTableTrTd"><b>Liabilities: </b></td><td class="FormDivTableTrTd">$' . number_format($truckAssets + $woodAssets - $balance, 2) . '</td></tr>';
+						?>
 					</table>
 				</div>
 			</form>

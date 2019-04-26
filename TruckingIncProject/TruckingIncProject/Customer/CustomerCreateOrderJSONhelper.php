@@ -26,10 +26,10 @@ $productID = $row2['productID'];
 $numInStock = $row2['numInStock'];
 $costPerUnit = $row2['costSoldPerUnit'];
 
-// Retrieve card number and cvv
+// Retrieve payment information
 $cardNumber = $_POST['CardNumber']; $cardNumber = htmlentities($cardNumber);
 $cvv = $_POST['CVV']; $cvv = htmlentities($cvv);
-
+$expr = $_POST['Expiration']; $expr = htmlentities($expr);
 
 // Calculate total cost of order
 $shippingFee = 1500;
@@ -54,11 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       "LumberType" => $lumberType,
 	    "NumberUnits" => $numberOfUnits,
 	    "Street" => $street,
-	    "City" => $city,
-	    "State" => $state,
+      "City" => $city,
+      "State" => $state,
       "ZIP" => $zip,
       "CardNumber" => $cardNumber,
       "CVV" => $cvv,
+      "Expiration" => $expr,
       "CostPerUnit" => $costPerUnit,
       "ShippingFee" => $shippingFee,
       "TotalCost" => $totalCost

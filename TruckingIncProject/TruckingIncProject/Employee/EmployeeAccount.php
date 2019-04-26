@@ -94,13 +94,14 @@
             <ul>
                 <li><a href="EmployeeHome.php">Employee Home</a></li>
                 <li><a class="active" href="EmployeeAccount.php">My Account</a></li>
-                <li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>
-                <li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
+                <?php if ($fetchPermissionsCheck[0] == 'A') {echo '<li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>';}?>
+                <?php if ($fetchPermissionsCheck[0] == 'A') {echo '<li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>';}?>
                 <?php if ($fetchPositionCheck[0] == 'Truck Driver') {echo '<li><a href="EmployeeTakeJob.php">Find Job</a></li>';}?>
-                <li><a href="EmployeeAssignTruck.php">Truck Management</a></li>
-                <li><a href="EmployeeResupply.php">Inventory</a></li>
-                <li><a href="EmployeeViewShipments.php">View Shipments</a></li>
-                <li><a href="AccountingInfo.php">Accounting Information</a></li>
+                <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="EmployeeAssignTruck.php">Truck Management</a></li>';}?>
+                <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="EmployeeResupply.php">Inventory</a></li>';}?>
+                <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B' || $fetchPermissionsCheck[0] == 'C') {echo '<li><a href="EmployeeViewShipments.php">View Shipments</a></li>';}?>
+                <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="AccountingInfo.php">Accounting Information</a></li>';}?>
+                <li><a href="Graphs.php">Graphs</a></li>
                 <li style="float:right; width:150px" ;>
                     <!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
                     <form action="EmployeeHomeHelper.php" method="POST" class="Form">
@@ -138,8 +139,8 @@
                             echo '
 					<td>' . $row['employeeID'] . '</td>
 					<td>' . $row['firstName'] . ' ' . $row['middleInitial'] . ' ' . $row['lastName'] . '</td>
-					<td><input type="text" id="streetChange" name="streetChange" class="FormDivTableTrTdText" value="' . $row['street'] . '" size="15" maxlength="30"/></td>
-					<td><input type="text" id="cityChange" name="cityChange" class="FormDivTableTrTdText" value="' . $row['city'] . '" size="5" maxlength="30"/></td>
+					<td><input type="text" id="streetChange" name="streetChange" class="FormDivTableTrTdText" value="' . $row['street'] . '" size="15" maxlength="30" required/></td>
+					<td><input type="text" id="cityChange" name="cityChange" class="FormDivTableTrTdText" value="' . $row['city'] . '" size="5" maxlength="30" required/></td>
 
 					<td><select id="stateChange" name="stateChange" class="FormDivTableTrTdSel">
 						<option value="' . $row['state'] . '">' . $row['state'] . '</option>
@@ -155,8 +156,8 @@
 						<option value="VA">VA</option> <option value="WA">WA</option> <option value="WV">WV</option> <option value="WI">WI</option> <option value="WY">WY</option>
 					</select></td>
 
-					<td><input title="Format: xxxxx or xxxxx-xxxx" type="text" id="zipChange" name="zipChange" class="FormDivTableTrTdText" value="' . $row['zip'] . '" size="7" maxlength="10" placeholder="11111 or 11111-1111" pattern="^\d{5}$|^\d{5}-\d{4}$"/></td>
-					<td><input title="Format: xxx-xxx-xxxx" type="text" id="phoneChange" name="phoneChange" class="FormDivTableTrTdText" value="' . $row['phone'] . '" size="9" maxlength="12" placeholder="111-111-1111" pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"/></td>
+					<td><input title="Format: xxxxx or xxxxx-xxxx" type="text" id="zipChange" name="zipChange" class="FormDivTableTrTdText" value="' . $row['zip'] . '" size="7" maxlength="10" placeholder="11111 or 11111-1111" pattern="^\d{5}$|^\d{5}-\d{4}$" required/></td>
+					<td><input title="Format: xxx-xxx-xxxx" type="text" id="phoneChange" name="phoneChange" class="FormDivTableTrTdText" value="' . $row['phone'] . '" size="9" maxlength="12" placeholder="111-111-1111" pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" required/></td>
 					<td><input type="email" id="emailChange" name="emailChange" class="FormDivTableTrTdText" value="' . $row['email'] . '" size="18" maxlength="50" placeholder="email@website.com" required/></td>
 
 					<td style="background-color: #ffffff; border:none;width:144px;">
@@ -179,8 +180,8 @@
                         </tr>
                         <tr>
                             <td><input type="password" name="CurrentPassword" id="CurrentPassword" class="FormDivTableTrTdText" size="20" maxlength="30"/ required></td>
-                            <td><input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" name="NewPassword" id="NewPassword" class="FormDivTableTrTdText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required /></td>
-                            <td><input title="Password must match" type="password" name="RepeatNewPassword" id="RepeatNewPassword" class="FormDivTableTrTdText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required /></td>
+                            <td><input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long." type="password" name="NewPassword" id="NewPassword" class="FormDivTableTrTdText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required /></td>
+                            <td><input title="Password must match. Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long." type="password" name="RepeatNewPassword" id="RepeatNewPassword" class="FormDivTableTrTdText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required /></td>
                             <td style="background-color: #ffffff; border:none;width:144px;"><button name="ChangePasswordButton" id="ChangePasswordButton" class="FormDivTableTrTdButton" value="ChangePassword">Change Password</button></td>
                         </tr>
                     </table>

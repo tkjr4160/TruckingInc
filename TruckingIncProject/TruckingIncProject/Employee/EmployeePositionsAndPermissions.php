@@ -53,13 +53,14 @@
         <ul>
             <li><a href="EmployeeHome.php">Employee Home</a></li>
             <li><a href="EmployeeAccount.php">My Account</a></li>
-            <li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>
-            <li><a class="active" href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
+            <?php if ($fetchPermissionsCheck[0] == 'A') {echo '<li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>';}?>
+            <?php if ($fetchPermissionsCheck[0] == 'A') {echo '<li><a class="active" href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>';}?>
             <?php if ($fetchPositionCheck[0] == 'Truck Driver') {echo '<li><a href="EmployeeTakeJob.php">Find Job</a></li>';}?>
-            <li><a href="EmployeeAssignTruck.php">Truck Management</a></li>
-            <li><a href="EmployeeResupply.php">Inventory</a></li>
-            <li><a href="EmployeeViewShipments.php">View Shipments</a></li>
-            <li><a href="AccountingInfo.php">Accounting Information</a></li>
+            <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="EmployeeAssignTruck.php">Truck Management</a></li>';}?>
+            <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="EmployeeResupply.php">Inventory</a></li>';}?>
+            <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B' || $fetchPermissionsCheck[0] == 'C') {echo '<li><a href="EmployeeViewShipments.php">View Shipments</a></li>';}?>
+            <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="AccountingInfo.php">Accounting Information</a></li>';}?>
+            <li><a href="Graphs.php">Graphs</a></li>
             <li style="float:right; width:150px" ;>
                 <!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
                 <form action="EmployeeHomeHelper.php" method="POST" class="Form">

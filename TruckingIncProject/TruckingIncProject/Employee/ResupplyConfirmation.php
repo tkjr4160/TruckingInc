@@ -21,7 +21,10 @@
 			<img src="../images/TruckingIncLogo.png" alt="Trucking Inc. Logo">
 			<div id=session style="background-color:aliceblue;">
 				<h3><u>Welcome!</u></h3><br>
-				<p>Please press "Ok" button to return.</p>
+				<?php
+        echo '<p><b>Signed in as: <br>' . $_SESSION['EmployeeUsername'] . '</b></p>';
+        echo '<h6><b>Date: </b>' . date('l, F jS, Y') . '</h6>';
+        ?>
 			</div>
 			<div class="social-media">
 				<div id="facebook">

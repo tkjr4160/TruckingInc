@@ -2,7 +2,7 @@
 
 -->
 
-<?php include "EmployeeTakeJobHelper.php"; ?>
+<?php include "EmployeeTakeJobHelper.php"; include "";?>
 
 <!DOCTYPE HTML>
 <html>
@@ -22,10 +22,10 @@
             <img src="../images/TruckingIncLogo.png" alt="Trucking Inc. Logo">
             <div id=session style="background-color:aliceblue;">
                 <h3><u>Welcome!</u></h3><br>
-				<?php
-				echo '<p><b>Signed in as: </b>' . $_SESSION['EmployeeUsername'] . '</p>';
-				echo '<h6><b>Date: </b>' . date('l, F jS, Y') . '</h6>';
-				?>
+                <?php
+                echo '<p><b>Signed in as: <br>' . $_SESSION['EmployeeUsername'] . '</b></p>';
+                echo '<h6><b>Date: </b>' . date('l, F jS, Y') . '</h6>';
+                ?>
             </div>
             <div class="social-media">
                 <div id="facebook">
@@ -53,15 +53,16 @@
 
         <nav>
             <ul>
-                <li><a href="EmployeeHome.php">Employee Home</a></li>
-                <li><a href="EmployeeAccount.php">My Account</a></li>
-                <li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>
-                <li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>
-                <li><a class="active" href="EmployeeTakeJob.php">Find Job</a></li>
-                <li><a href="EmployeeAssignTruck.php">Truck Management</a></li>
-                <li><a href="EmployeeResupply.php">Inventory</a></li>
-                <li><a href="EmployeeViewShipments.php">View Shipments</a></li>
-                <li><a href="AccountingInfo.php">Accounting Information</a></li>
+              <li><a href="EmployeeHome.php">Employee Home</a></li>
+              <li><a href="EmployeeAccount.php">My Account</a></li>
+              <?php if ($fetchPermissionsCheck[0] == 'A') {echo '<li><a href="EmployeeCreateNewEmployee.php">New Employee</a></li>';}?>
+              <?php if ($fetchPermissionsCheck[0] == 'A') {echo '<li><a href="EmployeePositionsAndPermissions.php">Positions and Permissions</a></li>';}?>
+              <?php if ($fetchPositionCheck[0] == 'Truck Driver') {echo '<li><a class="active" href="EmployeeTakeJob.php">Find Job</a></li>';}?>
+              <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="EmployeeAssignTruck.php">Truck Management</a></li>';}?>
+              <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="EmployeeResupply.php">Inventory</a></li>';}?>
+              <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B' || $fetchPermissionsCheck[0] == 'C') {echo '<li><a href="EmployeeViewShipments.php">View Shipments</a></li>';}?>
+              <?php if ($fetchPermissionsCheck[0] == 'A' || $fetchPermissionsCheck[0] == 'B') {echo '<li><a href="AccountingInfo.php">Accounting Information</a></li>';}?>
+              <li><a href="Graphs.php">Graphs</a></li>
                 <li style="float:right; width:150px" ;>
                     <!-- Submitting to "EmployeeSignIn.php" -- needs to submit to "EmployeeHomeHelper.php" -->
                     <form action="EmployeeHomeHelper.php" method="POST" class="Form">
@@ -102,7 +103,7 @@
 					<td>' . $row['shipmentID'] . '</td>
 					<td>' . $row['transactionID'] . '</td>
 					<td>' . $row['productID'] . '</td>
-					<td>' . $row['numberOfUnits'] . '</td>
+					<td>' . number_format($row['numberOfUnits'], 0) . '</td>
 					<td>' . $row['street'] . ', ' . $row['city'] . ', ' . $row['state'] . ' ' . $row['zip'] . '</td>
 					<td style="background-color:#ffffff;border:none;">
 					<button type="submit" id="AcceptShipmentButton" name="AcceptShipmentButton" class="" value="' . $row['shipmentID'] . '">Accept Shipment</button>
@@ -120,15 +121,15 @@
             <br>
             <table class="table" style="width:90%; text-align:center;">
                 <tr>
-                    <th style="text-align=left"><b>Shipment ID</b></th>
-                    <th align="left"><b>Transaction ID</b></th>
-                    <th align="left"><b>Product ID</b></th>
-                    <th align="left"><b>Number of Units</b></th>
-                    <th align="left"><b>Address</b></th>
-                    <th align="left"><b>Accepted On</b></th>
-                    <th align="left"><b>Mileage Used</b></th>
-                    <th align="left"><b>Maintenance Costs</b></th>
-                    <th align="left"><b>Fuel Costs</b></th>
+                    <td align="left"><b>Shipment ID</b></td>
+                    <td align="left"><b>Transaction ID</b></td>
+                    <td align="left"><b>Product ID</b></td>
+                    <td align="left"><b>Number of Units</b></td>
+                    <td align="left"><b>Address</b></td>
+                    <td align="left"><b>Accepted On</b></td>
+                    <td align="left"><b>Mileage Used</b></td>
+                    <td align="left"><b>Maintenance Costs</b></td>
+                    <td align="left"><b>Fuel Costs</b></td>
                 </tr>
                 <?php
                 foreach ($currentJobsArray as $row) {
@@ -137,17 +138,17 @@
                         <td align="left">' . $row['shipmentID'] . '</td>
                         <td align="left">' . $row['transactionID'] . '</td>
                         <td align="left">' . $row['productID'] . '</td>
-                        <td align="left">' . $row['numberOfUnits'] . '</td>
+                        <td align="left">' . number_format($row['numberOfUnits'], 0) . '</td>
                         <td align="left">' . $row['street'] . ', ' . $row['city'] . ', ' . $row['state'] . ' ' . $row['zip'] . '</td>
                         <td align="left">' . $row['dt'] . '</td>
                         <form action="EmployeeTakeJobHelper.php" method="POST" class="Form">
-                            <td align="left"> <input type="text" id="MileageUsed" name="MileageUsed" class="FormDivParText" size="15" maxlength="6" required/></td>
-                            <td align="left"> <input type="text" id="TruckMaintenanceCosts" name="TruckMaintenanceCosts" class="FormDivParText" size="15" maxlength="6" required/></td>
-                            <td align="left"> <input type="text" id="FuelCosts" name="FuelCosts" class="FormDivParText" size="15" maxlength="6" required/></td>
+                            <td align="left"> <input type="text" id="MileageUsed" name="MileageUsed" class="FormDivParText" size="15" maxlength="6" pattern="[0-9]{1,6}" title="Must be a number less than 1,000,000." required/></td>
+                            <td align="left"> <input type="text" id="TruckMaintenanceCosts" name="TruckMaintenanceCosts" class="FormDivParText" size="15" maxlength="6" pattern="[0-9]{1,6}" title="Must be a number less than 1,000,000." required/></td>
+                            <td align="left"> <input type="text" id="FuelCosts" name="FuelCosts" class="FormDivParText" size="15" maxlength="6" pattern="[0-9]{1,6}" title="Must be a number less than 1,000,000." required/></td>
                             <input type="hidden" value="' . $row['shipmentID'] . '" name="ShipmentID"/>
                             <input type="hidden" value="' . $row['transactionID'] . '" name="TransactionID"/>
-                            <td style="background-color:#ffffff;border:none;">
-                            <button type="submit" id="UpdateShipmentButton"  name="UpdateShipmentButton" class="FormDivParText" value="UpdateShipment">Update</button>
+                            <td>
+                            <button type="submit" id="UpdateShipmentButton" name="UpdateShipmentButton" class="FormDivParText" value="UpdateShipment">Update</button>
                             </td>
                         </form>
                     </tr>';
@@ -160,29 +161,30 @@
             </div>
                 <table class="table" style="width:90%; text-align:center;">
                     <tr>
-                        <th align="left"><b>Shipment ID</b></th>
-                        <th align="left"><b>Transaction ID</b></th>
-                        <th align="left"><b>Product ID</b></td>
-                        <th align="left"><b>Number of Units</b></th>
-                        <th align="left"><b>Address</b></td>
-                        <th align="left"><b>Completed On</b></th>
-                        <th align="left"><b>Mileage Used</b></th>
-                        <th align="left"><b>Maintenance Costs</b></th>
-                        <th align="left"><b>Fuel Costs</b></th>
+                        <td align="left"><b>Shipment ID</b></td>
+                        <td align="left"><b>Transaction ID</b></td>
+                        <td align="left"><b>Product ID</b></td>
+                        <td align="left"><b>Number of Units</b></td>
+                        <td align="left"><b>Address</b></td>
+                        <td align="left"><b>Completed On</b></td>
+                        <td align="left"><b>Mileage Used</b></td>
+                        <td align="left"><b>Maintenance Costs</b></td>
+                        <td align="left"><b>Fuel Costs</b></td>
                     </tr>
                     <?php
+
                     foreach ($completedJobsArray as $row) {
                         echo '
                         <tr>
                             <td align="left">' . $row['shipmentID'] . '</td>
                             <td align="left">' . $row['transactionID'] . '</td>
                             <td align="left">' . $row['productID'] . '</td>
-                            <td align="left">' . $row['numberOfUnits'] . '</td>
+                            <td align="left">' . number_format($row['numberOfUnits'], 0) . '</td>
                             <td align="left">' . $row['street'] . ', ' . $row['city'] . ', ' . $row['state'] . ' ' . $row['zip'] . '</td>
                             <td align-"left">' . $row['dt'] . '</td>
-                            <td align="left">' . $row['mileageUsed'] . '</td>
-                            <td align="left">' . $row['truckMaintenanceCosts'] . '</td>
-                            <td align="left">' . $row['fuelCosts'] . '</td>
+                            <td align="left">' . number_format($row['mileageUsed'], 0) . '</td>
+                            <td align="left">$' . number_format($row['truckMaintenanceCosts'], 2) . '</td>
+                            <td align="left">$' . number_format($row['fuelCosts'], 2) . '</td>
                         </tr>';
                     }
                     ?>

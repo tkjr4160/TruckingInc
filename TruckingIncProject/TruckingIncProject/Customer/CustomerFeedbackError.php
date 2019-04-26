@@ -2,13 +2,13 @@
 
 -->
 
-<?php include "CustomerAccountHelper.php"; ?>
+<?php include "CustomerFeedbackHelper.php"; ?>
 
 <!DOCTYPE HTML>
 <html>
 
 <head>
-  <title>Customer Order Too Large</title>
+  <title>Customer Feedback Error</title>
   <meta charset="utf-8" />
   <link href="../css/main.css" rel="stylesheet" type="text/css">
 </head>
@@ -60,8 +60,8 @@
     </nav>
 
     <div id="page-heading">
-      <h1><u>My Account</u><br><br>
-        <span>Edit Account Information</span>
+      <h1><u>Customer Feedback</u><br><br>
+        <span>Email not recieved!</span>
       </h1>
     </div>
 
@@ -69,8 +69,8 @@
   <div class="wrapper" style="height: 380px;">
     &nbsp;
     <h1 style="text-align:center;"><u>ERROR!</u></h1>
-    <form action="CustomerCreateOrder.php" method="post" style="text-align:center;">
-      <p>Not enough product in stock!</p>
+    <form action="CustomerFeedback.php" method="post" style="text-align:center;">
+      <p>Your email was not recieved!</p>
       <button type="submit" style="width:20%; margin:0 auto;">Ok</button>
     </form>
     &nbsp;

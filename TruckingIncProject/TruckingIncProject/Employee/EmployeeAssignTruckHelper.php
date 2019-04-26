@@ -2,7 +2,7 @@
 
 session_start();
 require ('CheckSignedIn.php');
-require ('CheckPermissionAorBorC.php'); // change to CheckPermissionA.php
+require ('CheckPermissionAorB.php'); // change to CheckPermissionA.php
 
 $CheckPositionQuery = "Select position From Employee Where WebsiteUsername = '$_SESSION[EmployeeUsername]'";
 $CheckPositionExecution = @mysqli_query($dbc, $CheckPositionQuery);

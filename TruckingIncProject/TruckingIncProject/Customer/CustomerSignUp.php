@@ -78,12 +78,12 @@
                 <br>
                 <p>
                     <label>New Password:</label>
-                    <input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" id="CustomerPassword" name="CustomerPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
+                    <input title="Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long." type="password" id="CustomerPassword" name="CustomerPassword" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required />
                 </p>
                 <br>
                 <p>
                     <label>Repeat Password: </label>
-                    <input title="Password must contain xat least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long" type="password" id="CustomerRepeatPassword" name="CustomerRepeatPassword" class="FormDivParText" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required/>
+                    <input title="Password must match. Password must contain at least one uppercase letter, one lowercase letter and one number. May be up to 30 characters long." type="password" id="CustomerRepeatPassword" name="CustomerRepeatPassword" size="20" maxlength="30" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])\w{3,30}" required />
                 </p>
                 <br>
                 <p>
@@ -169,17 +169,17 @@
                 <br>
                 <p>
                     <label>Zip: </label>
-                    <input type="text" id="CustomerZip" name="CustomerZip" size="15" maxlength="10" required />
+                    <input title="Format: xxxxx or xxxxx-xxxx" type="text" id="CustomerZip" name="CustomerZip" size="15" minlength="5" maxlength="10" placeholder="11111 or 11111-1111" pattern="^\d{5}$|^\d{5}-\d{4}$" required />
                 </p>
                 <br>
                 <p>
-                    <label>Phone: </label>
-                    <input type="text" id="CustomerPhone" name="CustomerPhone" size="15" maxlength="12" required />
+                    <label>Phone:  </label>
+                    <input title="Format: xxx-xxx-xxxx" type="text" id="CustomerPhone" name="CustomerPhone" size="15" maxlength="12" placeholder="111-111-1111" pattern="((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" required />
                 </p>
                 <br>
                 <p>
                     <label>Email: </label>
-                    <input type="text" id="CustomerEmail" name="CustomerEmail" size="20" maxlength="50" required />
+                    <input type="email" id="CustomerEmail" name="CustomerEmail" size="20" maxlength="50" required />
                 </p>
                 <br>
                 <p>
